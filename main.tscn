@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqow47bch5ocs"]
+
+[ext_resource type="Script" uid="uid://c6aa6ue3lrcrn" path="res://movement.gd" id="1_0xm2m"]
+[ext_resource type="Shader" uid="uid://dqpkc5grqk4q3" path="res://main.gdshader" id="1_ig7tw"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0xm2m"]
+size = Vector2(100, 100)
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ig7tw"]
+seed = 8
+frequency = 1.0
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0xm2m"]
+width = 5120
+height = 5120
+noise = SubResource("FastNoiseLite_ig7tw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
+render_priority = 0
+shader = ExtResource("1_ig7tw")
+shader_parameter/height_scale = 0.15
+shader_parameter/noise = SubResource("NoiseTexture2D_0xm2m")
+
+[node name="Main" type="Node"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70741796, 4.818483)
+script = ExtResource("1_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23878717, 0)
+mesh = SubResource("PlaneMesh_0xm2m")
+surface_material_override/0 = SubResource("ShaderMaterial_h2yge")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(0.8588437, 0, 0.5122377, 0, 1, 0, -0.5122377, 0, 0.8588437, 2.088797, 0.6331316, 3.6915853)
+light_color = Color(1, 0.47058824, 0.28235295, 1)
+light_energy = 0.175
+
+[node name="OmniLight3D" type="OmniLight3D" parent="OmniLight3D"]
+transform = Transform3D(0.8588438, 0, 0.51223767, 0, 1, 0, -0.51223767, 0, 0.8588438, 1.2454884, 0.5055963, -7.5317144)
+light_color = Color(1, 0.47058824, 0.28235295, 1)
+light_energy = 0.175
+
+[node name="OmniLight3D" type="OmniLight3D" parent="OmniLight3D/OmniLight3D"]
+transform = Transform3D(0.8588436, 0, 0.5122377, 0, 1, 0, -0.5122377, 0, 0.8588436, -0.5446596, 20.30258, 4.530428)
+light_color = Color(0.94581836, 0.94696015, 0.95260316, 1)
+omni_range = 4096.0
+omni_attenuation = 1.598
