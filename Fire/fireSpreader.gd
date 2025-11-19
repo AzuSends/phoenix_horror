@@ -120,4 +120,3 @@ func _input(event):
 		if event.pressed and not event.echo:
 			if event.keycode == KEY_SPACE:
 				print("Space key pressed!")
-
