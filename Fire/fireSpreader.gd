@@ -2,6 +2,7 @@ extends GridMap
 
 
 var FireInstance = preload("res://Fire/FireInstance.gd")
+var fireScene = preload("res://Fire/Fire.tscn")
 	
 	# Called when the node enters the scene tree for the first time.
 var pheonixFire = FireInstance.fireInstance
@@ -55,6 +56,11 @@ func setOnFire(flame, location):
 		if fireGrid.has(location):
 			if randi_range(1,8) == 8 and fireGrid[neighbor]["flame"].getIntensity() == 0:
 				fireGrid[neighbor]["flame"].setIntensity(1)
+				var instance = fireScene.instantiate()
+				add_child(instance)
+				instance.position.x = location.x
+				instance.position.y = location.y
+				instance.position.z = location.z
 	
 	
 	flame.intensifyFlame()

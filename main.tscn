@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=10 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Script" uid="uid://c6aa6ue3lrcrn" path="res://movement.gd" id="1_0xm2m"]
 [ext_resource type="Shader" uid="uid://dqpkc5grqk4q3" path="res://main.gdshader" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://bo62n4aqiiixc" path="res://Fire.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://ba7pkgwn5eauc" path="res://Fire/fireSpreader.gd" id="3_my2oe"]
 [ext_resource type="MeshLibrary" uid="uid://cwagtxhirfe52" path="res://Level/levelMLProto.tres" id="4_jf7eq"]
 
@@ -61,8 +60,6 @@ omni_attenuation = 1.598
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_272bh")
 
-[node name="Fire" parent="." instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.382, 0)
 [node name="Level" type="GridMap" parent="."]
 transform = Transform3D(4, 0, 0, 0, 27.394, 0, 0, 0, 3.04, 0, 0.5, 0)
 mesh_library = ExtResource("4_jf7eq")

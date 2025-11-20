@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bo62n4aqiiixc"]
+
+[ext_resource type="Shader" uid="uid://bksiyykf8pdga" path="res://Fire/basic_fire.tres" id="1_2qkn5"]
+[ext_resource type="Texture2D" uid="uid://dxbmnfwqx63ft" path="res://Perlin_noise_example.png" id="2_qk8vh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2j45n"]
+render_priority = 0
+shader = ExtResource("1_2qkn5")
+shader_parameter/DissolveSpeed = Vector2(0, 1)
+shader_parameter/MainTexture = ExtResource("2_qk8vh")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kefos"]
+size = Vector2(2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2qkn5"]
+
+[node name="Fire" type="Node3D"]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_2j45n")
+amount = 1
+lifetime = 4.0
+mesh = SubResource("QuadMesh_kefos")
+gravity = Vector3(0, 0, 0)
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(0.8588437, 0, 0.51223785, 0, 1, 0, -0.51223785, 0, 0.8588437, 0, 0.05, 0)
+light_color = Color(1, 0.470588, 0.282353, 1)
+light_energy = 0.175
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_2qkn5")
