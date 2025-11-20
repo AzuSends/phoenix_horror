@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo62n4aqiiixc"]
+
+[ext_resource type="Shader" uid="uid://bksiyykf8pdga" path="res://basic_fire.tres" id="1_p7d3r"]
+[ext_resource type="Texture2D" uid="uid://dxbmnfwqx63ft" path="res://Perlin_noise_example.png" id="2_pbexy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2j45n"]
+render_priority = 0
+shader = ExtResource("1_p7d3r")
+shader_parameter/DissolveSpeed = Vector2(0, 1)
+shader_parameter/MainTexture = ExtResource("2_pbexy")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kefos"]
+
+[node name="Fire" type="Node3D"]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_2j45n")
+amount = 1
+lifetime = 4.0
+mesh = SubResource("QuadMesh_kefos")
+gravity = Vector3(0, 0, 0)
+scale_amount_min = 3.0
+scale_amount_max = 3.0
