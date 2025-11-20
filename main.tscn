@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=16 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Script" uid="uid://c6aa6ue3lrcrn" path="res://movement.gd" id="1_0xm2m"]
 [ext_resource type="Shader" uid="uid://dqpkc5grqk4q3" path="res://main.gdshader" id="1_ig7tw"]
+[ext_resource type="Shader" uid="uid://d1lolp17k55pj" path="res://sky.gdshader" id="3_h2yge"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0xm2m"]
 size = Vector2(100, 100)
@@ -23,6 +24,32 @@ render_priority = 0
 shader = ExtResource("1_ig7tw")
 shader_parameter/height_scale = 0.15
 shader_parameter/noise = SubResource("NoiseTexture2D_0xm2m")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
+material = SubResource("StandardMaterial3D_h2yge")
+size = Vector2(0.1, 0.1)
+orientation = 2
+
+[sub_resource type="Curve" id="Curve_1bvp3"]
+_data = [Vector2(0, 0.022471905), 0.0, 0.0, 0, 0, Vector2(0.110465124, 1), 0.0, 0.0, 0, 0, Vector2(0.72674423, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.056179762), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_lquwl"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h2yge"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+shader = ExtResource("3_h2yge")
+shader_parameter/noise = SubResource("NoiseTexture2D_h2yge")
+
+[sub_resource type="Sky" id="Sky_7mycd"]
+sky_material = SubResource("ShaderMaterial_lquwl")
+
+[sub_resource type="Environment" id="Environment_272bh"]
+background_mode = 2
+sky = SubResource("Sky_7mycd")
 
 [node name="Main" type="Node"]
 
@@ -50,3 +77,16 @@ transform = Transform3D(0.8588436, 0, 0.5122377, 0, 1, 0, -0.5122377, 0, 0.85884
 light_color = Color(0.94581836, 0.94696015, 0.95260316, 1)
 omni_range = 4096.0
 omni_attenuation = 1.598
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22939485, 1.3508635, 1.8855863)
+amount = 100
+mesh = SubResource("PlaneMesh_1bvp3")
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 9.8, 0)
+scale_amount_curve = SubResource("Curve_1bvp3")
+color_ramp = SubResource("Gradient_lquwl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_272bh")
