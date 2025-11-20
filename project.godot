@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="pheonix_horror"
-run/main_scene="uid://cqow47bch5ocs"
+config/name="pheonix"
+run/main_scene="res://Project.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
