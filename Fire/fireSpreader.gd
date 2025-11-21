@@ -35,9 +35,9 @@ func _ready():
 			#print(location.distance_to(potentialNeighbor))
 			if location.distance_to(potentialNeighbor) <= fireDistance:
 				fireGrid[location]["neighbors"].append(potentialNeighbor)
-	player = get_node("../Player")
+	player = get_node("../Player3d")
 	
-	playerWaterController = get_node("../Player/WaterController")
+	playerWaterController = get_node("../Player3d/Head/WaterController")
 	playerWaterController.water.connect(_on_water)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

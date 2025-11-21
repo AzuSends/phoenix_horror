@@ -1,22 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=10 format=3 uid="uid://cqow47bch5ocs"]
 
-[ext_resource type="Script" uid="uid://c6aa6ue3lrcrn" path="res://movement.gd" id="1_0xm2m"]
 [ext_resource type="Shader" uid="uid://dqpkc5grqk4q3" path="res://main.gdshader" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://uu3re85r6rr1" path="res://Water/WaterControl.gd" id="2_lquwl"]
 [ext_resource type="Script" uid="uid://ba7pkgwn5eauc" path="res://Fire/fireSpreader.gd" id="3_my2oe"]
+[ext_resource type="PackedScene" uid="uid://cq8flfax68gco" path="res://Player/Player3D.tscn" id="4_1bvp3"]
 [ext_resource type="MeshLibrary" uid="uid://cwagtxhirfe52" path="res://Level/levelMLProto.tres" id="4_jf7eq"]
-[ext_resource type="Script" uid="uid://n6t6bpdcdf6u" path="res://player.gd" id="6_7mycd"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_272bh"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
-albedo_color = Color(0.14117648, 0.3764706, 1, 0.654902)
-emission = Color(0, 0, 1, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_lquwl"]
-material = SubResource("StandardMaterial3D_1bvp3")
-radius = 0.05
-height = 0.1
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0xm2m"]
 size = Vector2(100, 100)
@@ -46,25 +33,10 @@ ambient_light_energy = 0.57
 
 [node name="Main" type="Node"]
 
-[node name="Player" type="Area3D" parent="."]
-transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 22.28446, 0.6596627, 28.057905)
-script = ExtResource("6_7mycd")
-
-[node name="Hitbox" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999994, 0.29974365, 0.069178104, 1.7921753)
-shape = SubResource("BoxShape3D_272bh")
-
-[node name="WaterController" type="CPUParticles3D" parent="Player"]
-transform = Transform3D(11.232249, 0, 48.722034, 0, 50, 0, -48.722034, 0, 11.232249, 16.43396, -1.2901306, -14.0998535)
-amount = 20
-lifetime = 0.41
-mesh = SubResource("SphereMesh_lquwl")
-emission_shape = 1
-emission_sphere_radius = 0.05
-spread = 15.31
-initial_velocity_min = 4.0
-initial_velocity_max = 4.0
-script = ExtResource("2_lquwl")
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.57, -0.5239381, 0)
+use_collision = true
+size = Vector3(100, 1, 100)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.9999997, -0.0007707024, 5.155491e-05, 0.00077071285, 0.9999997, -0.00021891163, -5.139889e-05, 0.00021894835, 1, 13.578503, 0.021241188, 0.27043343)
@@ -93,6 +65,5 @@ data = {
 }
 script = ExtResource("3_my2oe")
 
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.2811, 0.72194195, 28.0376)
-script = ExtResource("1_0xm2m")
+[node name="Player3d" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.299, 0, 28.555)
