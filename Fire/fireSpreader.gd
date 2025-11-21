@@ -14,6 +14,9 @@ const fireSpreadTimer = 1.5
 const spreadIntensity = 3
 	
 var fireGrid = get_used_cells()
+
+var player
+var playerWaterController
 	
 func _ready():
 	##init grid
@@ -32,6 +35,10 @@ func _ready():
 			#print(location.distance_to(potentialNeighbor))
 			if location.distance_to(potentialNeighbor) <= fireDistance:
 				fireGrid[location]["neighbors"].append(potentialNeighbor)
+	player = get_node("../Player")
+	
+	playerWaterController = get_node("../Player/WaterController")
+	playerWaterController.water.connect(_on_water)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -47,7 +54,6 @@ func _process(delta):
 		
 
 func setOnFire(flame, location):
-		
 	if flame.getIntensity() < spreadIntensity:
 		flame.intensifyFlame()
 		return
@@ -85,6 +91,11 @@ func findFireFromLocation(location: Vector3):
 	
 	return closest
 
+func _on_water():
+	var closestFire = findFireFromLocation(self.to_local(player.position))
+	if (closestFire != null):
+		fireGrid[closestFire]["flame"].setIntensity(0)
+		print(closestFire)
 
 #NOT YET IMPLIMENTED, CAN DO LATER
 	# on receive signal of splashing water on CELL, call reduceFlame() on CELL
