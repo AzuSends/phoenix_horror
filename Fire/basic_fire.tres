@@ -52,6 +52,7 @@ constant = Color(3.924, 3.79, 0, 1)
 output_port_for_preview = 0
 
 [sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_t8ig2"]
+billboard_type = 2
 keep_scale = true
 
 [resource]
@@ -67,8 +68,8 @@ void vertex() {
 	mat4 n_out2p0;
 // GetBillboardMatrix:2
 	{
-		mat4 __mvm = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
-		__mvm = __mvm * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
+		mat4 __mvm = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], MODEL_MATRIX[1], vec4(normalize(cross(INV_VIEW_MATRIX[0].xyz, MODEL_MATRIX[1].xyz)), 0.0), MODEL_MATRIX[3]);
+		__mvm = __mvm * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, 1.0, 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
 		n_out2p0 = __mvm;
 	}
 
@@ -153,23 +154,23 @@ nodes/fragment/2/position = Vector2(880, 1120)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_hm5ro")
 nodes/fragment/3/position = Vector2(1060, 660)
 nodes/fragment/6/node = SubResource("VisualShaderNodeColorConstant_ko11b")
-nodes/fragment/6/position = Vector2(-1000, -100)
+nodes/fragment/6/position = Vector2(300, -40)
 nodes/fragment/7/node = SubResource("VisualShaderNodeColorConstant_woaka")
-nodes/fragment/7/position = Vector2(-1000, 20)
+nodes/fragment/7/position = Vector2(300, 80)
 nodes/fragment/9/node = SubResource("VisualShaderNodeUVFunc_5bvgd")
-nodes/fragment/9/position = Vector2(-900, 680)
+nodes/fragment/9/position = Vector2(400, 740)
 nodes/fragment/10/node = SubResource("VisualShaderNodeVectorOp_t8ig2")
-nodes/fragment/10/position = Vector2(-1140, 640)
+nodes/fragment/10/position = Vector2(160, 700)
 nodes/fragment/11/node = SubResource("VisualShaderNodeInput_hm5ro")
-nodes/fragment/11/position = Vector2(-1480, 520)
+nodes/fragment/11/position = Vector2(-180, 580)
 nodes/fragment/12/node = SubResource("VisualShaderNodeVec2Parameter_pxhl2")
-nodes/fragment/12/position = Vector2(-1460, 780)
+nodes/fragment/12/position = Vector2(-160, 840)
 nodes/fragment/13/node = SubResource("VisualShaderNodeMix_t8ig2")
-nodes/fragment/13/position = Vector2(-600, -20)
+nodes/fragment/13/position = Vector2(700, 40)
 nodes/fragment/30/node = SubResource("VisualShaderNodeVectorOp_7lcoi")
 nodes/fragment/30/position = Vector2(1300, 160)
 nodes/fragment/31/node = SubResource("VisualShaderNodeUVFunc_t8ig2")
-nodes/fragment/31/position = Vector2(-940, 200)
+nodes/fragment/31/position = Vector2(360, 260)
 nodes/fragment/32/node = SubResource("VisualShaderNodeVectorDecompose_t8ig2")
 nodes/fragment/32/position = Vector2(1520, 320)
 nodes/fragment/33/node = SubResource("VisualShaderNodeFloatOp_ot3vm")

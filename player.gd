@@ -1,5 +1,6 @@
 extends Node
 var movement;
+var SPEED = 5.0;
 
 
 func _ready() -> void:
@@ -22,10 +23,10 @@ func _unhandled_input(event) -> void:
 
 func do_Move (delta: float) -> void:
 	if Input.is_action_pressed("walk_right"):
-		self.position += Vector3(cos(-self.rotation.y) * 1.0 * delta, 0.0,sin(-self.rotation.y) * 1.0 * delta)
+		self.position += Vector3(cos(-self.rotation.y) * SPEED * delta, 0.0,sin(-self.rotation.y) * SPEED * delta)
 	if Input.is_action_pressed("walk_left"):
-		self.position -= Vector3(cos(-self.rotation.y) * 1.0 * delta, 0.0,sin(-self.rotation.y) * 1.0 * delta)
+		self.position -= Vector3(cos(-self.rotation.y) * SPEED * delta, 0.0,sin(-self.rotation.y) * SPEED * delta)
 	if Input.is_action_pressed("walk_forward"):
-		self.position -= Vector3(sin(self.rotation.y) * 1.0 * delta, 0.0,cos(self.rotation.y) * 1.0 * delta)
+		self.position -= Vector3(sin(self.rotation.y) * SPEED * delta, 0.0,cos(self.rotation.y) * SPEED * delta)
 	if Input.is_action_pressed("walk_backward"):
-		self.position += Vector3(sin(self.rotation.y) * 1.0 * delta, 0.0,cos(self.rotation.y) * 1.0 * delta)
+		self.position += Vector3(sin(self.rotation.y) * SPEED * delta, 0.0,cos(self.rotation.y) * SPEED * delta)

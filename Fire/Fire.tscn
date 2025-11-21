@@ -17,6 +17,7 @@ size = Vector2(2, 2)
 [node name="Fire" type="Node3D"]
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 material_override = SubResource("ShaderMaterial_2j45n")
 amount = 1
 lifetime = 4.0

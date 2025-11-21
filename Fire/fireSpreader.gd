@@ -94,7 +94,7 @@ func findFireFromLocation(location: Vector3):
 func _on_water():
 	var closestFire = findFireFromLocation(self.to_local(player.position))
 	if (closestFire != null):
-		fireGrid[closestFire]["flame"].reduceFlame()
+		fireGrid[closestFire]["flame"].setIntensity(0)
 		print(closestFire)
 
 #NOT YET IMPLIMENTED, CAN DO LATER
