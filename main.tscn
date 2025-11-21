@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=11 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Shader" uid="uid://dqpkc5grqk4q3" path="res://main.gdshader" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://ba7pkgwn5eauc" path="res://Fire/fireSpreader.gd" id="3_my2oe"]
 [ext_resource type="PackedScene" uid="uid://cq8flfax68gco" path="res://Player/Player3D.tscn" id="4_1bvp3"]
 [ext_resource type="MeshLibrary" uid="uid://cwagtxhirfe52" path="res://Level/levelMLProto.tres" id="4_jf7eq"]
+[ext_resource type="PackedScene" uid="uid://bo62n4aqiiixc" path="res://Fire/Fire.tscn" id="5_lquwl"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0xm2m"]
 size = Vector2(100, 100)
@@ -27,9 +28,11 @@ shader_parameter/height_scale = 0.15
 shader_parameter/noise = SubResource("NoiseTexture2D_0xm2m")
 
 [sub_resource type="Environment" id="Environment_272bh"]
-background_mode = 2
-ambient_light_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
-ambient_light_energy = 0.57
+background_mode = 3
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+glow_enabled = true
+glow_hdr_threshold = 0.9
 
 [node name="Main" type="Node"]
 
@@ -45,6 +48,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_h2yge")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(0.858844, 0, 0.512238, 0, 1, 0, -0.512238, 0, 0.858844, 2.0888, 0.633132, 3.69159)
+visible = false
 light_color = Color(1, 0.470588, 0.282353, 1)
 light_energy = 0.175
 
@@ -67,3 +71,6 @@ script = ExtResource("3_my2oe")
 
 [node name="Player3d" parent="." instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.299, 0, 28.555)
+
+[node name="Fire" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.560295, -0.023937881, 36.58313)

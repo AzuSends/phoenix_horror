@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bo62n4aqiiixc"]
+[gd_scene load_steps=10 format=3 uid="uid://bo62n4aqiiixc"]
 
 [ext_resource type="Shader" uid="uid://bksiyykf8pdga" path="res://Fire/basic_fire.tres" id="1_2qkn5"]
 [ext_resource type="Texture2D" uid="uid://dxbmnfwqx63ft" path="res://Perlin_noise_example.png" id="2_qk8vh"]
@@ -12,24 +12,52 @@ shader_parameter/MainTexture = ExtResource("2_qk8vh")
 [sub_resource type="QuadMesh" id="QuadMesh_kefos"]
 size = Vector2(2, 2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qkn5"]
+vertex_color_use_as_albedo = true
+emission_enabled = true
+emission = Color(0.91012275, 0, 0.0165204, 1)
+emission_energy_multiplier = 8.14
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_qk8vh"]
+material = SubResource("StandardMaterial3D_2qkn5")
+
+[sub_resource type="Curve" id="Curve_7k83m"]
+_data = [Vector2(0, 1), 0.0, 0.9662918, 0, 0, Vector2(0.58720934, 0.6516854), 0.0, 0.0, 0, 0, Vector2(0.9709303, 0.4044944), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_oftr6"]
+offsets = PackedFloat32Array(0.01369863, 0.74657536)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.75686276, 0, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_2qkn5"]
 
 [node name="Fire" type="Node3D"]
+top_level = true
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="Shader-Based" type="CPUParticles3D" parent="."]
+visible = false
 material_override = SubResource("ShaderMaterial_2j45n")
 amount = 1
 lifetime = 4.0
 mesh = SubResource("QuadMesh_kefos")
 gravity = Vector3(0, 0, 0)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(0.8588437, 0, 0.51223785, 0, 1, 0, -0.51223785, 0, 0.8588437, 0, 0.5, 0)
-light_color = Color(1, 0.470588, 0.282353, 1)
-light_energy = 0.175
+[node name="Particle-Based" type="CPUParticles3D" parent="."]
+amount = 100
+lifetime = 0.5
+mesh = SubResource("QuadMesh_qk8vh")
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector3(0, 100, 0)
+radial_accel_min = -15.46
+radial_accel_max = -5.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_7k83m")
+color_ramp = SubResource("Gradient_oftr6")
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_2qkn5")
