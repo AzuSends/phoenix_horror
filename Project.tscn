@@ -1,7 +1,98 @@
-[gd_scene load_steps=2 format=3 uid="uid://crx87dksoap1i"]
+[gd_scene load_steps=10 format=3 uid="uid://crx87dksoap1i"]
 
 [ext_resource type="PackedScene" uid="uid://cqow47bch5ocs" path="res://main.tscn" id="1_1ucg5"]
+[ext_resource type="Texture2D" uid="uid://s3j180kqsnve" path="res://Textures/T_smoke_flipbook.png" id="2_8x2fg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b34ge"]
+transparency = 1
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(1.6853648, 1.6853648, 1.6853648, 1)
+albedo_texture = ExtResource("2_8x2fg")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sjqfn"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 1.8
+initial_velocity_max = 2.3
+angular_velocity_min = -50.000015
+angular_velocity_max = 49.99998
+gravity = Vector3(0, 0, 0)
+scale_min = 0.9
+scale_max = 2.3
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_1xgel"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8x2fg"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("2_8x2fg")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_b34ge"]
+offsets = PackedFloat32Array(0.14150943, 0.49056605, 0.8679245)
+colors = PackedColorArray(1, 0.110000014, 0.110000014, 1, 12.391425, 11.408295, 0, 1, 1, 0.53333336, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sjqfn"]
+gradient = SubResource("Gradient_b34ge")
+use_hdr = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1xgel"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 1.8
+initial_velocity_max = 2.3
+angular_velocity_min = -50.000015
+angular_velocity_max = 49.99998
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 3.0
+color = Color(1, 0.06999999, 0.06999999, 1)
+color_ramp = SubResource("GradientTexture1D_sjqfn")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Main" parent="." instance=ExtResource("1_1ucg5")]
+
+[node name="Smoke" type="GPUParticles3D" parent="Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.63008, 0.13832223, 0)
+material_override = SubResource("StandardMaterial3D_b34ge")
+amount = 20
+lifetime = 2.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_sjqfn")
+draw_pass_1 = SubResource("QuadMesh_1xgel")
+
+[node name="Fire maybe" type="GPUParticles3D" parent="Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.902225, 0.13832223, 0)
+material_override = SubResource("StandardMaterial3D_8x2fg")
+amount = 20
+lifetime = 2.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_1xgel")
+draw_pass_1 = SubResource("QuadMesh_1xgel")
