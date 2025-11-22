@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=12 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Shader" uid="uid://dqpkc5grqk4q3" path="res://main.gdshader" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://ba7pkgwn5eauc" path="res://Fire/fireSpreader.gd" id="3_my2oe"]
 [ext_resource type="PackedScene" uid="uid://cq8flfax68gco" path="res://Player/Player3D.tscn" id="4_1bvp3"]
 [ext_resource type="MeshLibrary" uid="uid://cwagtxhirfe52" path="res://Level/levelMLProto.tres" id="4_jf7eq"]
 [ext_resource type="PackedScene" uid="uid://bo62n4aqiiixc" path="res://Fire/Fire.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://klfgqbx1wjv" path="res://Water/WaterPool.tscn" id="6_7mycd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0xm2m"]
 size = Vector2(100, 100)
@@ -74,3 +75,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.299, 0, 28.555)
 
 [node name="Fire" parent="." instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.560295, -0.023937881, 36.58313)
+
+[node name="WaterPool" parent="." instance=ExtResource("6_7mycd")]
+transform = Transform3D(9.463811, 0, 0, 0, 1, 0, 0, 0, 9.59219, 28.812626, 0.53703016, 25.966055)
