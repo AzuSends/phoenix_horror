@@ -15,7 +15,7 @@ fractal_type = 2
 noise = SubResource("FastNoiseLite_p4qcs")
 seamless = true
 as_normal_map = true
-bump_strength = 32.0
+bump_strength = 3.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_r0m8o"]
 noise_type = 3
@@ -26,7 +26,7 @@ fractal_type = 2
 noise = SubResource("FastNoiseLite_r0m8o")
 seamless = true
 as_normal_map = true
-bump_strength = 32.0
+bump_strength = 3.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p4qcs"]
 render_priority = 0
