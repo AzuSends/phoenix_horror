@@ -8,9 +8,9 @@ var fireScene = preload("res://Fire/Fire.tscn")
 var pheonixFire = FireInstance.fireInstance
 var startingPosition
 var fireOrigin 
-const fireDistance = 5
+const fireDistance = 2
 var timeSinceFireUpdate = 0
-const fireSpreadTimer = 1.5
+const fireSpreadTimer = 0.5 #TODO: CHANGE TO 2 ONCE FIRESPREAD VISUAL IS FIXED
 const spreadIntensity = 3
 	
 var fireGrid = get_used_cells()
@@ -28,6 +28,9 @@ func _ready():
 	startingPosition = fireGrid.pick_random()
 	fireGrid = gridThrowaway
 	fireGrid[startingPosition]["flame"].setIntensity(1)
+	var instance = fireScene.instantiate()
+	add_child(instance)
+	instance.position = startingPosition
 	
 	##finding & assigning neighbors
 	for location in fireGrid.keys():
@@ -51,7 +54,8 @@ func _process(delta):
 			setOnFire(fire, location)
 			
 		timeSinceFireUpdate = 0
-		#debugPrintFires()
+		print("____")
+		debugPrintFires()
 		
 
 func setOnFire(flame, location):
@@ -106,4 +110,5 @@ func _on_water():
 func debugPrintFires():
 	for location in fireGrid.keys():
 		if fireGrid[location]["flame"].getIntensity() >= 3:
-			print(location, ": ", fireGrid[location]["flame"], ", ", fireGrid[location]["neighbors"])
+			print(location, ": ", fireGrid[location]["flame"])
+			#", ", fireGrid[location]["neighbors"])
