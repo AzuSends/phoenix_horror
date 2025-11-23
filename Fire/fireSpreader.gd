@@ -8,7 +8,7 @@ var fireScene = preload("res://Fire/Fire.tscn")
 var pheonixFire = FireInstance.fireInstance
 var startingPosition
 var fireOrigin 
-const fireDistance = 2
+const fireDistance = 3
 var timeSinceFireUpdate = 0
 const fireSpreadTimer = 0.5 #TODO: CHANGE TO 2 ONCE FIRESPREAD VISUAL IS FIXED
 const spreadIntensity = 3
@@ -24,20 +24,22 @@ func _ready():
 	##init grid
 	var gridThrowaway = {}
 	for location in fireGrid:
-		print(location)
+		#print(location)
 		# location goes from smallest to largest in x and z coordinates
-		gridThrowaway[location] = {"flame": pheonixFire.new(location), "neighbors": []}
-		instances[location] = fireScene.instantiate()
-		add_child(instances[location])
-		instances[location].position.x = location.x
-		instances[location].position.y = location.y
-		instances[location].position.z = location.z
-		instances[location].visible = false
+		var globalPosition = to_global(location)
+		gridThrowaway[globalPosition] = {"flame": pheonixFire.new(globalPosition), "neighbors": []}
+		instances[globalPosition] = fireScene.instantiate()
+		add_child(instances[globalPosition])
+		instances[globalPosition].position.x = globalPosition.x
+		instances[globalPosition].position.y = globalPosition.y
+		instances[globalPosition].position.z = globalPosition.z
+		instances[globalPosition].visible = false
 		
-	startingPosition = fireGrid.pick_random()
+	startingPosition = to_global(fireGrid.pick_random())
 	fireGrid = gridThrowaway
 	fireGrid[startingPosition]["flame"].setIntensity(1)
 	instances[startingPosition].visible = true
+	#print(startingPosition, " vs ", to_global(startingPosition))
 	
 	##finding & assigning neighbors
 	for location in fireGrid.keys():
@@ -50,6 +52,7 @@ func _ready():
 	
 	playerWaterController = get_node("../Player3d/Head/WaterController")
 	playerWaterController.water.connect(_on_water)
+	print(fireGrid)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -71,14 +74,14 @@ func setOnFire(flame, location):
 		flame.intensifyFlame()
 		return
 	#print("Igniting ", location)
-	#instances[location].visible = true
+	instances[location].visible = true
 	for neighbor in fireGrid[location]["neighbors"]:
 		if fireGrid.has(neighbor):
-			#print("NEIGHBOR FOUND")
+			print("NEIGHBOR FOUND @, ", location)
 			#instances[neighbor].visible = true
 			if randi_range(1,8) == 8 and fireGrid[neighbor]["flame"].getIntensity() == 0:
 				fireGrid[neighbor]["flame"].setIntensity(1)
-				print("Igniting ", neighbor)
+				#print("Igniting ", neighbor)
 				instances[location].visible = true
 				
 				#var instance = fireScene.instantiate()

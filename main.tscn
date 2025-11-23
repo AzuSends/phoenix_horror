@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=17 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Shader" uid="uid://dqpkc5grqk4q3" path="res://main.gdshader" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://bo4h74qm5lr4b" path="res://hdri/qwantani_moon_noon_puresky_4k.exr" id="2_272bh"]
@@ -46,6 +46,8 @@ ambient_light_source = 2
 ambient_light_color = Color(0, 0.003921569, 0.03137255, 1)
 glow_enabled = true
 glow_hdr_threshold = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5vw27"]
 
 [node name="Main" type="Node"]
 
@@ -96,3 +98,7 @@ script = ExtResource("8_5vw27")
 [node name="Moonlight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.45930654, 0.35771632, -0.81306624, 0.39135826, 0.7402099, 0.5467433, 0.7974186, -0.5693228, 0.19998801, -44.24698, 97.692635, 73.346985)
 light_color = Color(0.6745098, 0.6745098, 0.75686276, 1)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.1, 0, 0, 0, 2.2, 0, 0, 0, 2.1, 31, 3, -3)
+mesh = SubResource("CylinderMesh_5vw27")
