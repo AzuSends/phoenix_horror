@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc3omdo5qtdqq"]
+
+[ext_resource type="Texture2D" uid="uid://s3j180kqsnve" path="res://Textures/T_smoke_flipbook.png" id="1_3h2n8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjys3"]
+transparency = 1
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(1.6853648, 1.6853648, 1.6853648, 1)
+albedo_texture = ExtResource("1_3h2n8")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pim54"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 1.8
+initial_velocity_max = 2.3
+angular_velocity_min = -50.000015
+angular_velocity_max = 49.99998
+gravity = Vector3(0, 0, 0)
+scale_min = 0.9
+scale_max = 2.3
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_w2ctr"]
+
+[node name="Smoke scene" type="Node3D"]
+
+[node name="Smoke" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_tjys3")
+amount = 20
+lifetime = 2.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_pim54")
+draw_pass_1 = SubResource("QuadMesh_w2ctr")

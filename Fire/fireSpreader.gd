@@ -2,7 +2,7 @@ extends GridMap
 
 
 var FireInstance = preload("res://Fire/FireInstance.gd")
-var fireScene = preload("res://Fire/Fire.tscn")
+var fireScene = preload("res://Smoke and Fire/fire_scene.tscn")
 	
 	# Called when the node enters the scene tree for the first time.
 var pheonixFire = FireInstance.fireInstance
@@ -64,6 +64,9 @@ func setOnFire(flame, location):
 				fireGrid[neighbor]["flame"].setIntensity(1)
 				var instance = fireScene.instantiate()
 				add_child(instance)
+				#set as top level to prevent scaling issues pleasepleasepleaseplease
+				instance.set_as_top_level(true)
+				instance.scale = Vector3.ONE
 				instance.position.x = location.x
 				instance.position.y = location.y
 				instance.position.z = location.z
