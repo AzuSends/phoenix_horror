@@ -17,6 +17,7 @@ var fireGrid = get_used_cells()
 
 var player
 var playerWaterController
+
 	
 func _ready():
 	##init grid

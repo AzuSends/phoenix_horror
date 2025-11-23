@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=16 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Shader" uid="uid://dqpkc5grqk4q3" path="res://main.gdshader" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://bo4h74qm5lr4b" path="res://hdri/qwantani_moon_noon_puresky_4k.exr" id="2_272bh"]
@@ -7,6 +7,7 @@
 [ext_resource type="MeshLibrary" uid="uid://cwagtxhirfe52" path="res://Level/levelMLProto.tres" id="4_jf7eq"]
 [ext_resource type="PackedScene" uid="uid://bo62n4aqiiixc" path="res://Fire/Fire.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://klfgqbx1wjv" path="res://Water/WaterPool.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://r1pw746bgs7j" path="res://Water/WaterPool.gd" id="8_5vw27"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0xm2m"]
 size = Vector2(100, 100)
@@ -89,6 +90,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.560295, -0.023937881, 36.5
 
 [node name="WaterPool" parent="." instance=ExtResource("6_7mycd")]
 transform = Transform3D(9.463811, 0, 0, 0, 1, 0, 0, 0, 9.59219, 28.812626, 0.53703016, 25.966055)
+script = ExtResource("8_5vw27")
 
 [node name="Moonlight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.45930654, 0.35771632, -0.81306624, 0.39135826, 0.7402099, 0.5467433, 0.7974186, -0.5693228, 0.19998801, -44.24698, 97.692635, 73.346985)
