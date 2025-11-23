@@ -17,20 +17,27 @@ var fireGrid = get_used_cells()
 
 var player
 var playerWaterController
+var instances = {}
 
 	
 func _ready():
 	##init grid
 	var gridThrowaway = {}
 	for location in fireGrid:
+		print(location)
+		# location goes from smallest to largest in x and z coordinates
 		gridThrowaway[location] = {"flame": pheonixFire.new(location), "neighbors": []}
+		instances[location] = fireScene.instantiate()
+		add_child(instances[location])
+		instances[location].position.x = location.x
+		instances[location].position.y = location.y
+		instances[location].position.z = location.z
+		instances[location].visible = false
 		
 	startingPosition = fireGrid.pick_random()
 	fireGrid = gridThrowaway
 	fireGrid[startingPosition]["flame"].setIntensity(1)
-	var instance = fireScene.instantiate()
-	add_child(instance)
-	instance.position = startingPosition
+	instances[startingPosition].visible = true
 	
 	##finding & assigning neighbors
 	for location in fireGrid.keys():
@@ -52,26 +59,33 @@ func _process(delta):
 		for location in fireGrid:
 			var fire = fireGrid[location]["flame"]
 			setOnFire(fire, location)
+			#instances[location].visible = true
 			
 		timeSinceFireUpdate = 0
-		print("____")
-		debugPrintFires()
+		#print("____")
+		#debugPrintFires()
 		
 
 func setOnFire(flame, location):
 	if flame.getIntensity() < spreadIntensity:
 		flame.intensifyFlame()
 		return
-		
+	#print("Igniting ", location)
+	#instances[location].visible = true
 	for neighbor in fireGrid[location]["neighbors"]:
-		if fireGrid.has(location):
+		if fireGrid.has(neighbor):
+			#print("NEIGHBOR FOUND")
+			#instances[neighbor].visible = true
 			if randi_range(1,8) == 8 and fireGrid[neighbor]["flame"].getIntensity() == 0:
 				fireGrid[neighbor]["flame"].setIntensity(1)
-				var instance = fireScene.instantiate()
-				add_child(instance)
-				instance.position.x = location.x
-				instance.position.y = location.y
-				instance.position.z = location.z
+				print("Igniting ", neighbor)
+				instances[location].visible = true
+				
+				#var instance = fireScene.instantiate()
+				#add_child(instance)
+				#instance.position.x = location.x
+				#instance.position.y = location.y
+				#instance.position.z = location.z
 	
 	
 	flame.intensifyFlame()
@@ -100,7 +114,7 @@ func _on_water():
 	var closestFire = findFireFromLocation(self.to_local(player.position))
 	if (closestFire != null):
 		fireGrid[closestFire]["flame"].setIntensity(0)
-		print(closestFire)
+		#print("CLOSTEST FIRE: ", closestFire)
 
 #NOT YET IMPLIMENTED, CAN DO LATER
 	# on receive signal of splashing water on CELL, call reduceFlame() on CELL

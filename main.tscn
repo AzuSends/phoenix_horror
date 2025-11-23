@@ -87,6 +87,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.299, 0, 28.555)
 
 [node name="Fire" parent="." instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.560295, -0.023937881, 36.58313)
+visible = false
 
 [node name="WaterPool" parent="." instance=ExtResource("6_7mycd")]
 transform = Transform3D(9.463811, 0, 0, 0, 1, 0, 0, 0, 9.59219, 28.812626, 0.53703016, 25.966055)
