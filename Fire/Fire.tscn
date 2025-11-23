@@ -13,10 +13,11 @@ shader_parameter/MainTexture = ExtResource("2_qk8vh")
 size = Vector2(2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qkn5"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+diffuse_mode = 3
 vertex_color_use_as_albedo = true
-emission_enabled = true
-emission = Color(0.9098039, 0.003921569, 0, 1)
-emission_energy_multiplier = 16.0
 billboard_mode = 2
 
 [sub_resource type="QuadMesh" id="QuadMesh_qk8vh"]
@@ -27,8 +28,8 @@ _data = [Vector2(0, 1), 0.0, 0.9662918, 0, 0, Vector2(0.58720934, 0.6516854), 0.
 point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_oftr6"]
-offsets = PackedFloat32Array(0.01369863, 0.74657536)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0.75686276, 0, 1)
+offsets = PackedFloat32Array(0, 0.0890411, 0.86986303)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.75686276, 0, 1, 1, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2qkn5"]
 
