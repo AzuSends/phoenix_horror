@@ -19,7 +19,6 @@ var player
 var playerWaterController
 var instances = {}
 
-enum fireState {NONE, BURNING, SMOULDERING} #Smouldering will stop a fire from instantly reigniting with a lockout timer
 
 	
 func _ready():
@@ -39,9 +38,7 @@ func _ready():
 		
 	startingPosition = to_global(fireGrid.pick_random())
 	fireGrid = gridThrowaway
-	fireGrid[startingPosition]["flame"].setIntensity(1)
-	fireGrid[startingPosition]["state"] = fireState.BURNING;
-	instances[startingPosition].visible = true
+	startFire(startingPosition)
 	#print(startingPosition, " vs ", to_global(startingPosition))
 	
 	##finding & assigning neighbors
@@ -78,17 +75,15 @@ func _process(delta):
 
 func setOnFire(flame, location):
 	if flame.getIntensity() < spreadIntensity:
-		flame.intensifyFlame() 
+		flame.tryIntensifyFlame() 
 		return
 	instances[location].visible = true
 	for neighbor in fireGrid[location]["neighbors"]:
 		if fireGrid.has(neighbor):
 			print("NEIGHBOR FOUND @, ", location)
 			#instances[neighbor].visible = true
-			if randi_range(1,8) == 8 and fireGrid[neighbor]["flame"].getIntensity() == 0:
-				fireGrid[neighbor]["flame"].setIntensity(1)
-				#print("Igniting ", neighbor)
-				instances[location].visible = true
+			if randi_range(1,16) == 16 and fireGrid[neighbor]["flame"].getIntensity() == 0:
+				startFire(neighbor);
 				
 				#var instance = fireScene.instantiate()
 				#add_child(instance)
@@ -97,21 +92,14 @@ func setOnFire(flame, location):
 				#instance.position.z = location.z
 	
 	
-	flame.intensifyFlame()
+	flame.tryIntensifyFlame()
 
-# Something I was testing	
-func trySpread(neighborLocs):
-	for location in neighborLocs:
-		if randi_range(1,8) == 8 and fireGrid[location]["state"] == fireState.NONE:
-			#print("Igniting ", location)
-			fireGrid[location]["flame"].setIntensity(1)
-			fireGrid[location]["state"] = fireState.BURNING;
-			instances[location].visible = true
+
 	
 #NOTE: for the water thingy, you can call this function to get the location, 
 #assing it to a var then do fireGrid[var]["flame"].reduceFlame() or .setIntensity(0)
 func findFireFromLocation(location: Vector3):
-	const distanceGap = 5
+	const distanceGap = 8
 	var closest = Vector3.INF
 	var closestInDist = location.distance_to(closest)
 	
@@ -131,13 +119,24 @@ func findFireFromLocation(location: Vector3):
 func _on_water():
 	var closestFire = findFireFromLocation(player.position)
 	if (closestFire != null):
-		fireGrid[closestFire]["flame"].setIntensity(0);
-		instances[closestFire].visible = false
+		putOutFire(closestFire)
+		
 		#print("CLOSTEST FIRE: ", closestFire)
 
 #NOT YET IMPLIMENTED, CAN DO LATER
 	# on receive signal of splashing water on CELL, call reduceFlame() on CELL
 	# update partsOnFire and fireGrid accordingly
+	
+	#extra error handling and abstraction 
+func startFire(location):
+	fireGrid[location]["flame"].setIntensity(1)
+	if fireGrid[location]["flame"].getFireState() == true:
+		instances[location].visible = true
+func putOutFire(location):
+	fireGrid[location]["flame"].setIntensity(0)
+	if fireGrid[location]["flame"].getFireState() == false:
+		instances[location].visible = false
+	
 	
 
 func debugPrintFires():
