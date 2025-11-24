@@ -19,6 +19,8 @@ var player
 var playerWaterController
 var instances = {}
 
+enum fireState {NONE, BURNING, SMOULDERING} #Smouldering will stop a fire from instantly reigniting with a lockout timer
+
 	
 func _ready():
 	##init grid
@@ -38,6 +40,7 @@ func _ready():
 	startingPosition = to_global(fireGrid.pick_random())
 	fireGrid = gridThrowaway
 	fireGrid[startingPosition]["flame"].setIntensity(1)
+	fireGrid[startingPosition]["state"] = fireState.BURNING;
 	instances[startingPosition].visible = true
 	#print(startingPosition, " vs ", to_global(startingPosition))
 	
@@ -57,12 +60,16 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	timeSinceFireUpdate+= delta
-		
+	
 	if (timeSinceFireUpdate >= fireSpreadTimer):
+		
 		for location in fireGrid:
+			
 			var fire = fireGrid[location]["flame"]
 			setOnFire(fire, location)
 			#instances[location].visible = true
+		
+		#for location in fireGrid:
 			
 		timeSinceFireUpdate = 0
 		#print("____")
@@ -71,9 +78,8 @@ func _process(delta):
 
 func setOnFire(flame, location):
 	if flame.getIntensity() < spreadIntensity:
-		flame.intensifyFlame()
+		flame.intensifyFlame() 
 		return
-	#print("Igniting ", location)
 	instances[location].visible = true
 	for neighbor in fireGrid[location]["neighbors"]:
 		if fireGrid.has(neighbor):
@@ -92,8 +98,16 @@ func setOnFire(flame, location):
 	
 	
 	flame.intensifyFlame()
-	
 
+# Something I was testing	
+func trySpread(neighborLocs):
+	for location in neighborLocs:
+		if randi_range(1,8) == 8 and fireGrid[location]["state"] == fireState.NONE:
+			#print("Igniting ", location)
+			fireGrid[location]["flame"].setIntensity(1)
+			fireGrid[location]["state"] = fireState.BURNING;
+			instances[location].visible = true
+	
 #NOTE: for the water thingy, you can call this function to get the location, 
 #assing it to a var then do fireGrid[var]["flame"].reduceFlame() or .setIntensity(0)
 func findFireFromLocation(location: Vector3):
@@ -101,22 +115,24 @@ func findFireFromLocation(location: Vector3):
 	var closest = Vector3.INF
 	var closestInDist = location.distance_to(closest)
 	
-	for fireLocation in fireGrid.keys():
+	for fireLocation in fireGrid:
 		var newDist = location.distance_to(fireLocation)
 		if newDist < closestInDist:
 			closestInDist = newDist
 			closest = fireLocation
 	
 	#mouse is way too far from flame to have any effect, dont return the object	
+	#print(closestInDist)
 	if closestInDist > distanceGap:
 		return null
 	
 	return closest
 
 func _on_water():
-	var closestFire = findFireFromLocation(self.to_local(player.position))
+	var closestFire = findFireFromLocation(player.position)
 	if (closestFire != null):
-		fireGrid[closestFire]["flame"].setIntensity(0)
+		fireGrid[closestFire]["flame"].setIntensity(0);
+		instances[closestFire].visible = false
 		#print("CLOSTEST FIRE: ", closestFire)
 
 #NOT YET IMPLIMENTED, CAN DO LATER

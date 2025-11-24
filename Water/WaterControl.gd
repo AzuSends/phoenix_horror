@@ -8,11 +8,11 @@ signal water;
 var waterPool;
 @onready var player: CharacterBody3D = $"../.."
 var bucketTimer = 0.0;
-
+var useRate = 0.25;
+var fillRate = 1.0;
 
 func _ready() -> void:
 	self.emitting = false;
-	#Signalling back and forth is at most as complicated as any other solution I though of :/ sozz
 	waterPool = get_node("/root/Node3D/Main/WaterPool")
 	
 
@@ -24,12 +24,12 @@ func _process(delta: float) -> void:
 	if (waterOn == true and fillOn == false and waterStored > 0):
 		self.emitting = true;
 		water.emit()
-		waterStored -= .25;
+		waterStored -= useRate;
 	else:
 		self.emitting = false;
 		
 	if (fillOn == true):
-		waterStored += 1
+		waterStored += fillRate
 	
 	if (waterStored >= waterMax):
 		fillOn = false

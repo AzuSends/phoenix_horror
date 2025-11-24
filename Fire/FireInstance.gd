@@ -27,6 +27,8 @@ class fireInstance extends Node3D:
 	func reduceFlame():
 		if intensity != minLevelFlame:
 			intensity -= 1
+		elif intensity == minLevelFlame:
+			intensity = 0
 	
 	func setIntensity(val):
 		if val >= 0 and val <= 5:
