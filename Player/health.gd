@@ -3,6 +3,11 @@ extends ProgressBar
 var health: float
 var MAXHEALTH: float = 100.0
 var healTimer = 0
+var isDead = false
+
+@onready var player: CharacterBody3D = $".."
+@onready var pov: Camera3D = $"../Head/Camera3D"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	health = MAXHEALTH / 2
@@ -23,4 +28,10 @@ func changeHealth(val: float):
 		die()
 		
 func die() -> void:
-	print("You Died")
+	player.disableMovement()
+	if !isDead:
+		isDead = true
+		for i in range(5):
+			pov.position.y -= 0.3
+			await get_tree().create_timer(0.5).timeout
+		get_tree().reload_current_scene()
