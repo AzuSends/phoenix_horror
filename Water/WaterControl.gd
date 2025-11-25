@@ -15,10 +15,6 @@ func _ready() -> void:
 	self.emitting = false;
 	waterPool = get_node("/root/Node3D/Main/WaterPool")
 	
-
-	
-
-
 func _process(delta: float) -> void:
 	bucketTimer += delta
 	if (waterOn == true and fillOn == false and waterStored > 0):
@@ -35,7 +31,6 @@ func _process(delta: float) -> void:
 		fillOn = false
 	
 func _unhandled_input(event) -> void:	
-	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if bucketTimer > 1:

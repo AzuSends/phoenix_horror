@@ -10,7 +10,7 @@ var startingPosition
 var fireOrigin 
 const fireDistance = 3
 var timeSinceFireUpdate = 0
-const fireSpreadTimer = 0.5 #TODO: CHANGE TO 2 ONCE FIRESPREAD VISUAL IS FIXED
+const fireSpreadTimer = 2
 const spreadIntensity = 3
 	
 var fireGrid = get_used_cells()
@@ -55,7 +55,6 @@ func _ready():
 	
 	playerWaterController = get_node("../Player3d/Head/WaterController")
 	playerWaterController.water.connect(_on_water)
-	print(fireGrid)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -67,7 +66,6 @@ func _process(delta):
 			
 			var fire = fireGrid[location]["flame"]
 			setOnFire(fire, location)
-			#instances[location].visible = true
 		
 		#for location in fireGrid:
 			
@@ -84,18 +82,10 @@ func setOnFire(flame, location):
 	for neighbor in fireGrid[location]["neighbors"]:
 		if fireGrid.has(neighbor):
 			print("NEIGHBOR FOUND @, ", location)
-			#instances[neighbor].visible = true
 			if randi_range(1,8) == 8 and fireGrid[neighbor]["flame"].getIntensity() == 0:
 				fireGrid[neighbor]["flame"].setIntensity(1)
-				#print("Igniting ", neighbor)
-				instances[location].visible = true
-				
-				#var instance = fireScene.instantiate()
-				#add_child(instance)
-				#instance.position.x = location.x
-				#instance.position.y = location.y
-				#instance.position.z = location.z
-	
+				print("Igniting ", neighbor)
+				instances[location].visible = true	
 	
 	flame.intensifyFlame()
 

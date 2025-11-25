@@ -1,0 +1,133 @@
+[gd_scene load_steps=44 format=3 uid="uid://peosx2a8qbyv"]
+
+[ext_resource type="PackedScene" uid="uid://bakts7ixvnece" path="res://Assets/Kenney/Platformer Kit/block-grass-corner-low.glb" id="1_h7uby"]
+[ext_resource type="PackedScene" uid="uid://b0dp61sbabkcq" path="res://Assets/Kenney/Platformer Kit/block-grass-corner-overhang-low.glb" id="2_0nsd7"]
+[ext_resource type="PackedScene" uid="uid://dpy2c4cfcmlxm" path="res://Assets/Kenney/Platformer Kit/block-grass-corner-overhang.glb" id="3_1yq8p"]
+[ext_resource type="PackedScene" uid="uid://d3ytxh7y0myul" path="res://Assets/Kenney/Platformer Kit/block-grass-corner.glb" id="4_67xo1"]
+[ext_resource type="PackedScene" uid="uid://b6muht7hir6fh" path="res://Assets/Kenney/Platformer Kit/block-grass-curve-half.glb" id="5_3o3s0"]
+[ext_resource type="PackedScene" uid="uid://4w2ein0ihvo7" path="res://Assets/Kenney/Platformer Kit/block-grass-curve-low.glb" id="6_jhove"]
+[ext_resource type="PackedScene" uid="uid://cv6wccqwj6h0l" path="res://Assets/Kenney/Platformer Kit/block-grass-curve.glb" id="7_5q4or"]
+[ext_resource type="PackedScene" uid="uid://dssovg6aektb6" path="res://Assets/Kenney/Platformer Kit/block-grass-edge.glb" id="8_bbkrb"]
+[ext_resource type="PackedScene" uid="uid://cyfrjq0s0fhrl" path="res://Assets/Kenney/Platformer Kit/block-grass-hexagon.glb" id="9_5h4mu"]
+[ext_resource type="PackedScene" uid="uid://b7be5axviuqf7" path="res://Assets/Kenney/Platformer Kit/block-grass-large-slope-narrow.glb" id="10_b21oo"]
+[ext_resource type="PackedScene" uid="uid://d2ku003c8y2tp" path="res://Assets/Kenney/Platformer Kit/block-grass-large-slope-steep-narrow.glb" id="11_gcvwv"]
+[ext_resource type="PackedScene" uid="uid://348h0pgqy2ow" path="res://Assets/Kenney/Platformer Kit/block-grass-large-slope-steep.glb" id="12_18f36"]
+[ext_resource type="PackedScene" uid="uid://db3bllfo045vg" path="res://Assets/Kenney/Platformer Kit/block-grass-large-slope.glb" id="13_mjri8"]
+[ext_resource type="PackedScene" uid="uid://bj2bsqgevxw4u" path="res://Assets/Kenney/Platformer Kit/block-grass-large-tall.glb" id="14_y2h36"]
+[ext_resource type="PackedScene" uid="uid://blf1ypdyxe627" path="res://Assets/Kenney/Platformer Kit/block-grass-large.glb" id="15_e7f85"]
+[ext_resource type="PackedScene" uid="uid://pxsxsxiy3bxm" path="res://Assets/Kenney/Platformer Kit/block-grass-long.glb" id="16_vuxmy"]
+[ext_resource type="PackedScene" uid="uid://uj43yu7k3pn6" path="res://Assets/Kenney/Platformer Kit/block-grass-low-hexagon.glb" id="17_epuyd"]
+[ext_resource type="PackedScene" uid="uid://21soj52dtomn" path="res://Assets/Kenney/Platformer Kit/block-grass-low-large.glb" id="18_dppvk"]
+[ext_resource type="PackedScene" uid="uid://dvb3m3g41kcbn" path="res://Assets/Kenney/Platformer Kit/block-grass-low-long.glb" id="19_ibluu"]
+[ext_resource type="PackedScene" uid="uid://bfe8ykelyj11f" path="res://Assets/Kenney/Platformer Kit/block-grass-low-narrow.glb" id="20_j4ako"]
+[ext_resource type="PackedScene" uid="uid://bb232f7smt7pi" path="res://Assets/Kenney/Platformer Kit/block-grass-low.glb" id="21_g1ro4"]
+[ext_resource type="PackedScene" uid="uid://d4jfvo70lu8qx" path="res://Assets/Kenney/Platformer Kit/block-grass-narrow.glb" id="22_vlpt8"]
+[ext_resource type="PackedScene" uid="uid://0i7w0tvrcmx4" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-corner.glb" id="23_qlets"]
+[ext_resource type="PackedScene" uid="uid://ya4s2u337rf2" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-edge.glb" id="24_r1to4"]
+[ext_resource type="PackedScene" uid="uid://bhj23cu58gnts" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-hexagon.glb" id="25_2s46d"]
+[ext_resource type="PackedScene" uid="uid://d05b5nfposm5f" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-large-slope-narrow.glb" id="26_sl2ql"]
+[ext_resource type="PackedScene" uid="uid://c01gatdk3ld46" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-large-slope-steep-narrow.glb" id="27_cry3r"]
+[ext_resource type="PackedScene" uid="uid://d11jsgo6v7hrc" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-large-slope-steep.glb" id="28_vmgs6"]
+[ext_resource type="PackedScene" uid="uid://cbifnqlcptl4t" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-large-slope.glb" id="29_jfr6d"]
+[ext_resource type="PackedScene" uid="uid://v7h7db4r1u8y" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-large-tall.glb" id="30_yq6c8"]
+[ext_resource type="PackedScene" uid="uid://53gbn8cokffy" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-large.glb" id="31_ojq08"]
+[ext_resource type="PackedScene" uid="uid://cnfrbpig6er01" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-long.glb" id="32_6hvkl"]
+[ext_resource type="PackedScene" uid="uid://bkk7cj1xlejig" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-low-hexagon.glb" id="33_qwy54"]
+[ext_resource type="PackedScene" uid="uid://blcjdh3xige68" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-low-large.glb" id="34_m88fc"]
+[ext_resource type="PackedScene" uid="uid://b4ixrckih4itk" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-low-long.glb" id="35_ojtl2"]
+[ext_resource type="PackedScene" uid="uid://mxg8nwpinv8h" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-low-narrow.glb" id="36_ljl0b"]
+[ext_resource type="PackedScene" uid="uid://trq6cw23j54b" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-low.glb" id="37_y6336"]
+[ext_resource type="PackedScene" uid="uid://udok5x4jwj62" path="res://Assets/Kenney/Platformer Kit/block-grass-overhang-narrow.glb" id="38_m6nqr"]
+[ext_resource type="PackedScene" uid="uid://b6jlarea37v4l" path="res://Assets/Kenney/Platformer Kit/block-grass.glb" id="39_7csq1"]
+[ext_resource type="PackedScene" uid="uid://claml06qrj5s3" path="res://Assets/Kenney/Platformer Kit/hedge-corner.glb" id="40_gnfqn"]
+[ext_resource type="PackedScene" uid="uid://c78ud37qlcwu6" path="res://Assets/Kenney/Platformer Kit/hedge.glb" id="41_0rxy3"]
+[ext_resource type="PackedScene" uid="uid://dugqbipxblk2n" path="res://Assets/Kenney/Platformer Kit/tree-pine.glb" id="42_rf5iw"]
+[ext_resource type="PackedScene" uid="uid://ngjolwl6odd" path="res://Assets/Kenney/Platformer Kit/tree.glb" id="43_gkcnt"]
+
+[node name="Tiles" type="Node3D"]
+
+[node name="block-grass-corner-low2" parent="." instance=ExtResource("1_h7uby")]
+
+[node name="block-grass-corner-overhang-low2" parent="." instance=ExtResource("2_0nsd7")]
+
+[node name="block-grass-corner-overhang2" parent="." instance=ExtResource("3_1yq8p")]
+
+[node name="block-grass-corner2" parent="." instance=ExtResource("4_67xo1")]
+
+[node name="block-grass-curve-half2" parent="." instance=ExtResource("5_3o3s0")]
+
+[node name="block-grass-curve-low2" parent="." instance=ExtResource("6_jhove")]
+
+[node name="block-grass-curve2" parent="." instance=ExtResource("7_5q4or")]
+
+[node name="block-grass-edge2" parent="." instance=ExtResource("8_bbkrb")]
+
+[node name="block-grass-hexagon2" parent="." instance=ExtResource("9_5h4mu")]
+
+[node name="block-grass-large-slope-narrow2" parent="." instance=ExtResource("10_b21oo")]
+
+[node name="block-grass-large-slope-steep-narrow2" parent="." instance=ExtResource("11_gcvwv")]
+
+[node name="block-grass-large-slope-steep2" parent="." instance=ExtResource("12_18f36")]
+
+[node name="block-grass-large-slope2" parent="." instance=ExtResource("13_mjri8")]
+
+[node name="block-grass-large-tall2" parent="." instance=ExtResource("14_y2h36")]
+
+[node name="block-grass-large2" parent="." instance=ExtResource("15_e7f85")]
+
+[node name="block-grass-long2" parent="." instance=ExtResource("16_vuxmy")]
+
+[node name="block-grass-low-hexagon2" parent="." instance=ExtResource("17_epuyd")]
+
+[node name="block-grass-low-large2" parent="." instance=ExtResource("18_dppvk")]
+
+[node name="block-grass-low-long2" parent="." instance=ExtResource("19_ibluu")]
+
+[node name="block-grass-low-narrow2" parent="." instance=ExtResource("20_j4ako")]
+
+[node name="block-grass-low2" parent="." instance=ExtResource("21_g1ro4")]
+
+[node name="block-grass-narrow2" parent="." instance=ExtResource("22_vlpt8")]
+
+[node name="block-grass-overhang-corner2" parent="." instance=ExtResource("23_qlets")]
+
+[node name="block-grass-overhang-edge2" parent="." instance=ExtResource("24_r1to4")]
+
+[node name="block-grass-overhang-hexagon2" parent="." instance=ExtResource("25_2s46d")]
+
+[node name="block-grass-overhang-large-slope-narrow2" parent="." instance=ExtResource("26_sl2ql")]
+
+[node name="block-grass-overhang-large-slope-steep-narrow2" parent="." instance=ExtResource("27_cry3r")]
+
+[node name="block-grass-overhang-large-slope-steep2" parent="." instance=ExtResource("28_vmgs6")]
+
+[node name="block-grass-overhang-large-slope2" parent="." instance=ExtResource("29_jfr6d")]
+
+[node name="block-grass-overhang-large-tall2" parent="." instance=ExtResource("30_yq6c8")]
+
+[node name="block-grass-overhang-large2" parent="." instance=ExtResource("31_ojq08")]
+
+[node name="block-grass-overhang-long2" parent="." instance=ExtResource("32_6hvkl")]
+
+[node name="block-grass-overhang-low-hexagon2" parent="." instance=ExtResource("33_qwy54")]
+
+[node name="block-grass-overhang-low-large2" parent="." instance=ExtResource("34_m88fc")]
+
+[node name="block-grass-overhang-low-long2" parent="." instance=ExtResource("35_ojtl2")]
+
+[node name="block-grass-overhang-low-narrow2" parent="." instance=ExtResource("36_ljl0b")]
+
+[node name="block-grass-overhang-low2" parent="." instance=ExtResource("37_y6336")]
+
+[node name="block-grass-overhang-narrow2" parent="." instance=ExtResource("38_m6nqr")]
+
+[node name="block-grass2" parent="." instance=ExtResource("39_7csq1")]
+
+[node name="hedge-corner2" parent="." instance=ExtResource("40_gnfqn")]
+
+[node name="hedge2" parent="." instance=ExtResource("41_0rxy3")]
+
+[node name="tree-pine2" parent="." instance=ExtResource("42_rf5iw")]
+
+[node name="tree2" parent="." instance=ExtResource("43_gkcnt")]
