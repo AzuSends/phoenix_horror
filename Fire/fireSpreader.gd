@@ -25,7 +25,6 @@ func _ready():
 	##init grid
 	var gridThrowaway = {}
 	for location in fireGrid:
-		#print(location)
 		# location goes from smallest to largest in x and z coordinates
 		var globalPosition = to_global(location)
 		gridThrowaway[globalPosition] = {"flame": pheonixFire.new(globalPosition), "neighbors": []}
@@ -39,13 +38,11 @@ func _ready():
 	startingPosition = to_global(fireGrid.pick_random())
 	fireGrid = gridThrowaway
 	startFire(startingPosition)
-	#print(startingPosition, " vs ", to_global(startingPosition))
 	
 	##finding & assigning neighbors
 	for location in fireGrid.keys():
 		for potentialNeighbor in fireGrid.keys():
 			if location == potentialNeighbor: continue
-			#print(location.distance_to(potentialNeighbor))
 			if location.distance_to(potentialNeighbor) <= fireDistance:
 				fireGrid[location]["neighbors"].append(potentialNeighbor)
 	player = get_node("../Player3d")
@@ -63,9 +60,7 @@ func _process(delta):
 			
 			var fire = fireGrid[location]["flame"]
 			setOnFire(fire, location)
-		
-		#for location in fireGrid:
-			
+	
 		timeSinceFireUpdate = 0
 		#print("____")
 		#debugPrintFires()
@@ -75,21 +70,11 @@ func setOnFire(flame, location):
 	if flame.getIntensity() < spreadIntensity:
 		flame.tryIntensifyFlame() 
 		return
-	instances[location].visible = true
 	for neighbor in fireGrid[location]["neighbors"]:
 		if fireGrid.has(neighbor):
-			print("NEIGHBOR FOUND @, ", location)
-			#instances[neighbor].visible = true
 			if randi_range(1,16) == 16 and fireGrid[neighbor]["flame"].getIntensity() == 0:
 				startFire(neighbor);
-				
-				#var instance = fireScene.instantiate()
-				#add_child(instance)
-				#instance.position.x = location.x
-				#instance.position.y = location.y
-				#instance.position.z = location.z
-	
-	
+
 	flame.tryIntensifyFlame()
 
 
@@ -134,8 +119,7 @@ func putOutFire(location):
 	fireGrid[location]["flame"].setIntensity(0)
 	if fireGrid[location]["flame"].getFireState() == false:
 		instances[location].visible = false
-	
-	
+
 
 func debugPrintFires():
 	for location in fireGrid.keys():
