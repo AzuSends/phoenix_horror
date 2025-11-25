@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bo62n4aqiiixc"]
+[gd_scene load_steps=11 format=3 uid="uid://bo62n4aqiiixc"]
 
 [ext_resource type="Shader" uid="uid://bksiyykf8pdga" path="res://Fire/basic_fire.tres" id="1_2qkn5"]
 [ext_resource type="Texture2D" uid="uid://dxbmnfwqx63ft" path="res://Perlin_noise_example.png" id="2_qk8vh"]
@@ -33,6 +33,8 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 0.75686276, 0, 1, 1, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2qkn5"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_qk8vh"]
+
 [node name="Fire" type="Node3D"]
 top_level = true
 
@@ -60,7 +62,15 @@ color_ramp = SubResource("Gradient_oftr6")
 [node name="Hitbox" type="Area3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 shape = SubResource("BoxShape3D_2qkn5")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+shape = SubResource("BoxShape3D_qk8vh")

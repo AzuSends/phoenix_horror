@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cq8flfax68gco"]
+[gd_scene load_steps=16 format=3 uid="uid://cq8flfax68gco"]
 
 [ext_resource type="Script" uid="uid://dws75go3iv2qw" path="res://Player/PlayerMovement.gd" id="1_cgweh"]
 [ext_resource type="Script" uid="uid://uu3re85r6rr1" path="res://Water/WaterControl.gd" id="2_n4phc"]
@@ -27,10 +27,12 @@ height = 0.1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_msm3w"]
 bg_color = Color(0.028461639, 0.36242223, 0.5240445, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xtsqg"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_msm3w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtsqg"]
-bg_color = Color(0.9999997, 0.15812653, 0.7839379, 1)
+bg_color = Color(0.6424829, 0.11986884, 0.076431505, 1)
 
 [node name="Player3d" type="CharacterBody3D"]
 script = ExtResource("1_cgweh")
@@ -78,6 +80,15 @@ offset_bottom = 34.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_cbrdi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_msm3w")
 script = ExtResource("3_cbrdi")
+
+[node name="Hitbox" type="Area3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008137584, 0.82016516, -2.8311243)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Hitbox"]
+transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("BoxShape3D_xtsqg")
 
 [node name="Health" type="ProgressBar" parent="."]
 offset_left = 10.0
