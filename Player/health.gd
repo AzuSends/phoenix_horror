@@ -31,7 +31,20 @@ func die() -> void:
 	player.disableMovement()
 	if !isDead:
 		isDead = true
-		for i in range(5):
-			pov.position.y -= 0.3
-			await get_tree().create_timer(0.5).timeout
+		set_physics_process(false)
+		camera_transition(player, 1.0, 0.5)
+		await get_tree().create_timer(2.5).timeout
 		get_tree().reload_current_scene()
+		#disable player controls and display death screen
+	
+
+func camera_transition(node, amount: float, duration: float) -> void:
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR).set_parallel(true)
+	var target_position = player.global_position + Vector3(0, -1, 0)
+	print("tweening")
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(pov, "rotation_degrees:z", -30, 1.0)
+	tween.tween_property(node, "position", target_position, duration)
+	#fade to black
+	#TODO: make this work lol. idk why the canvas layer is interfereing with player movement :p
+	#tween.tween_property($"../CanvasLayer/Control/ColorRect", "color", Color(0, 0, 0, 1), 2.7)

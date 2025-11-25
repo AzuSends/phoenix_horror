@@ -100,5 +100,20 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_xtsqg")
 rounded = true
 script = ExtResource("4_msm3w")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 1189.0
+offset_bottom = 715.0
+color = Color(1, 1, 1, 0)
+
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_on_area_exited"]
