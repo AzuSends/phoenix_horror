@@ -81,10 +81,10 @@ func setOnFire(flame, location):
 	instances[location].visible = true
 	for neighbor in fireGrid[location]["neighbors"]:
 		if fireGrid.has(neighbor):
-			print("NEIGHBOR FOUND @, ", location)
+			#print("NEIGHBOR FOUND @, ", location)
 			if randi_range(1,8) == 8 and fireGrid[neighbor]["flame"].getIntensity() == 0:
 				fireGrid[neighbor]["flame"].setIntensity(1)
-				print("Igniting ", neighbor)
+				#print("Igniting ", neighbor)
 				instances[location].visible = true	
 	
 	flame.intensifyFlame()

@@ -57,8 +57,10 @@ scale_amount_min = 0.5
 scale_amount_curve = SubResource("Curve_7k83m")
 color_ramp = SubResource("Gradient_oftr6")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Hitbox" type="Area3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 shape = SubResource("BoxShape3D_2qkn5")

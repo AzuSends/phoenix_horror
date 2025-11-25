@@ -1,12 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://cq8flfax68gco"]
+[gd_scene load_steps=15 format=3 uid="uid://cq8flfax68gco"]
 
 [ext_resource type="Script" uid="uid://dws75go3iv2qw" path="res://Player/PlayerMovement.gd" id="1_cgweh"]
 [ext_resource type="Script" uid="uid://uu3re85r6rr1" path="res://Water/WaterControl.gd" id="2_n4phc"]
+[ext_resource type="Script" uid="uid://dd182ao7ypcf7" path="res://Player/playerHurtbox.gd" id="2_xtsqg"]
 [ext_resource type="Script" uid="uid://dv0bwokbc5hsr" path="res://Player/waterBar.gd" id="3_cbrdi"]
+[ext_resource type="Script" uid="uid://vmjyfkqte2k7" path="res://Player/health.gd" id="4_msm3w"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ythm3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n4phc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_msm3w"]
+radius = 0.0005
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
 albedo_color = Color(0.14117648, 0.3764706, 1, 0.654902)
@@ -22,6 +27,11 @@ height = 0.1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_msm3w"]
 bg_color = Color(0.028461639, 0.36242223, 0.5240445, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_msm3w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtsqg"]
+bg_color = Color(0.9999997, 0.15812653, 0.7839379, 1)
+
 [node name="Player3d" type="CharacterBody3D"]
 script = ExtResource("1_cgweh")
 
@@ -32,6 +42,15 @@ mesh = SubResource("CapsuleMesh_ythm3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_n4phc")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_xtsqg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape3D_msm3w")
 
 [node name="Head" type="Node3D" parent="."]
 
@@ -59,3 +78,16 @@ offset_bottom = 34.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_cbrdi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_msm3w")
 script = ExtResource("3_cbrdi")
+
+[node name="Health" type="ProgressBar" parent="."]
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 196.0
+offset_bottom = 34.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_msm3w")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xtsqg")
+rounded = true
+script = ExtResource("4_msm3w")
+
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_on_area_exited"]
