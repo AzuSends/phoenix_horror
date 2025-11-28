@@ -19,7 +19,6 @@ func _process(delta: float) -> void:
 	bucketTimer += delta
 	if (waterOn == true and fillOn == false and waterStored > 0):
 		self.emitting = true;
-		water.emit()
 		waterStored -= useRate;
 	else:
 		self.emitting = false;
@@ -37,6 +36,7 @@ func _unhandled_input(event) -> void:
 				bucketTimer = 0
 				waterOn = !waterOn;
 				await get_tree().create_timer(0.25).timeout
+				water.emit()
 				waterOn = !waterOn;
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			if (waterPool.position.distance_to(player.position) < 5):

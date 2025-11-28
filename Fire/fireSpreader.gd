@@ -85,15 +85,17 @@ func findFireFromLocation(location: Vector3):
 	const distanceGap = 8
 	var closest = Vector3.INF
 	var closestInDist = location.distance_to(closest)
-	
 	for fireLocation in fireGrid:
-		var newDist = location.distance_to(fireLocation)
-		if newDist < closestInDist:
-			closestInDist = newDist
-			closest = fireLocation
+		if fireGrid[fireLocation]["flame"].getFireState() == true:
+			var newDist = location.distance_to(fireLocation)
+			if newDist < closestInDist:
+				closestInDist = newDist
+				closest = fireLocation
+		
 	
 	#mouse is way too far from flame to have any effect, dont return the object	
 	#print(closestInDist)
+	
 	if closestInDist > distanceGap:
 		return null
 	
