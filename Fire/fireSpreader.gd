@@ -31,7 +31,7 @@ func _ready():
 		instances[globalPosition] = fireScene.instantiate()
 		add_child(instances[globalPosition])
 		instances[globalPosition].position.x = globalPosition.x
-		instances[globalPosition].position.y = globalPosition.y
+		instances[globalPosition].position.y = globalPosition.y + 2.0
 		instances[globalPosition].position.z = globalPosition.z
 		instances[globalPosition].visible = false
 		
