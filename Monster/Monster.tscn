@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgaii4ahimp6k"]
+[gd_scene load_steps=6 format=3 uid="uid://cgaii4ahimp6k"]
 
 [ext_resource type="Script" uid="uid://bgq3c6f0twmm1" path="res://Monster/monsterNav.gd" id="1_m1pgs"]
+[ext_resource type="Shader" uid="uid://vadrkvabelv8" path="res://Burning.tres" id="2_viisk"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oag5t"]
-albedo_color = Color(0.039215688, 0.67058825, 0.25490198, 1)
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_viisk"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_m1pgs"]
-material = SubResource("StandardMaterial3D_oag5t")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h3emb"]
+render_priority = 0
+shader = ExtResource("2_viisk")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oag5t"]
 
@@ -15,7 +16,8 @@ transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
 script = ExtResource("1_m1pgs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_m1pgs")
+mesh = SubResource("CapsuleMesh_viisk")
+surface_material_override/0 = SubResource("ShaderMaterial_h3emb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_oag5t")
