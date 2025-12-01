@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://klfgqbx1wjv"]
+[gd_scene load_steps=9 format=3 uid="uid://klfgqbx1wjv"]
 
 [ext_resource type="Shader" uid="uid://bb7uvllt51545" path="res://Water/WaterPool.tres" id="1_p4qcs"]
 
@@ -41,6 +41,14 @@ shader_parameter/WaveDirection2 = Vector2(0, 1)
 shader_parameter/TimeScale2 = 0.025
 shader_parameter/Texture_Normal_2 = SubResource("NoiseTexture2D_2dqjj")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_p4qcs"]
+points = PackedVector3Array(-0.49999997, 0, -0.49999997, -0.49999997, 0, 0.49999997, 0.5, 0, -0.49999997, 0.5, 0, 0.49999997)
+
 [node name="WaterPool" type="MeshInstance3D"]
 mesh = SubResource("QuadMesh_p4qcs")
 surface_material_override/0 = SubResource("ShaderMaterial_p4qcs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_p4qcs")
