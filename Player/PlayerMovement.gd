@@ -9,7 +9,6 @@ var canMove = true
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
 
-
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	# Input.use_accumulated_input = false # More precise movement, but higher CPU usage
@@ -53,3 +52,5 @@ func _physics_process(delta: float) -> void:
 
 func disableMovement():
 	canMove = false
+
+	

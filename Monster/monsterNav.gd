@@ -13,6 +13,7 @@ extends CharacterBody3D
 @onready var sight: Area3D = $State_Machine/Sight
 @onready var attack_sight: Area3D = $State_Machine/AttackSight
 @onready var attack_area: CollisionShape3D = $Attack/HitBox/CollisionShape3D
+@onready var fireSpreader: GridMap = $"../Level"
 
 #export variable section :3
 @export_category("Enemy Stats")
@@ -27,6 +28,8 @@ var can_change_dir: bool
 var chase_dir_timer: float = 1.0
 var is_staggered: bool = false
 var damage: float = 20.0	#damage enemy deals to player
+const resetSpreadTimer = 10
+var spreadTimer = resetSpreadTimer
 
 const MOVE_SPEED: float = 4
 
@@ -56,7 +59,28 @@ func _physics_process(_delta: float) -> void:
 	if not self.is_on_floor():
 		self.velocity += get_gravity() * _delta 
 	interpret_state(_delta)
+	attemptSpread(_delta)
 	move_and_slide()
+	
+func attemptSpread(delta):
+	spreadTimer -= delta * 3
+	if spreadTimer <= 0:
+		print("attempting to fan flames")
+		var rng = RandomNumberGenerator.new()
+		var cellLocation = fireSpreader.findCellFromLocation(global_position)
+		var fireCell = fireSpreader.fireGrid[cellLocation]
+		print(fireCell["flame"].getFireState())
+		if rng.randi_range(1, 3) == 3:
+			if not fireCell["flame"].getFireState():
+				fireSpreader.startFire(cellLocation)
+				print("spreading fire")
+			else:
+				fireSpreader.fireGrid[cellLocation]["flame"].tryIntensifyFlame()
+				print("intensifying fire")
+		else:
+			print("failed spread")
+		spreadTimer = resetSpreadTimer
+		
 
 		
 func interpret_state(_delta):
@@ -66,7 +90,7 @@ func interpret_state(_delta):
 	match state_machine.current_state:
 		State_Machine.state.IDLE:
 			#make the enemy not move
-			print("Idle")
+			#print("Idle")
 			self.animation.play("Idle")
 			#code for idle goes here (get rid of pass)
 			if active_sight.has_overlapping_bodies() and not is_staggered: 
@@ -75,7 +99,7 @@ func interpret_state(_delta):
 				
 	match state_machine.current_state:
 		State_Machine.state.CHASE:
-			print("Chasing player")
+			#print("Chasing player")
 			#look at the player
 			look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
 			self.animation.play("Chase")
@@ -101,7 +125,7 @@ func interpret_state(_delta):
 	match state_machine.current_state:
 		State_Machine.state.ATTACK:
 			#start the animation:
-			print("Attacking Player")
+			#print("Attacking Player")
 			self.animation.play("Attack")
 			#set the attack area to enabled
 			attack_area.disabled = false
@@ -121,7 +145,7 @@ func get_randomized_dir() -> Vector3:
 	return direction.normalized()
 
 func _on_sprites_animation_finished() -> void:
-	print("does it ever get here")
+	#print("does it ever get here")
 	if animation.animation == "Attack":
 		can_attack = false
 		attack_area.disabled = true
@@ -154,7 +178,6 @@ func enemy_dead() -> void:
 
 #upon the hitbox being entered, the player will take damage
 func _on_hitbox_body_entered(body: Node3D) -> void:
-	print(body.name)
-	if body.name == "player":
-		#put the code where enemy damages player here
-		body.take_damage(damage)
+	if body.name == "Player3d":
+		var playerHealth = body.get_node("Health")
+		playerHealth.changeHealth(-damage)

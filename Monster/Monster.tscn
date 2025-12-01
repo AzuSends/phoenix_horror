@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cgaii4ahimp6k"]
+[gd_scene load_steps=15 format=3 uid="uid://cgaii4ahimp6k"]
 
 [ext_resource type="Script" uid="uid://bgq3c6f0twmm1" path="res://Monster/monsterNav.gd" id="1_m1pgs"]
 [ext_resource type="Shader" uid="uid://vadrkvabelv8" path="res://Burning.tres" id="2_viisk"]
 [ext_resource type="Script" uid="uid://c0uofa80skf1h" path="res://Monster/EnemyState.gd" id="3_h3emb"]
+[ext_resource type="Script" uid="uid://bg06wid3a80xr" path="res://Water/waterHitbox.gd" id="4_2t8d6"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="4_mqjb0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_viisk"]
@@ -26,7 +27,7 @@ size = Vector3(8.245348, 1, 9.316818)
 size = Vector3(2.0499592, 1.8493652, 2.2589874)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h3emb"]
-size = Vector3(1.1015625, 1.8276978, 1)
+size = Vector3(1.1015625, 1.5119934, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h3emb"]
 animations = [{
@@ -108,9 +109,10 @@ shape = SubResource("BoxShape3D_viisk")
 
 [node name="HurtBox" type="Area3D" parent="Attack"]
 collision_layer = 0
+script = ExtResource("4_2t8d6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Attack/HurtBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05078125, 0.14291383, 0)
+transform = Transform3D(1.2350003, 0, 0, 0, 1.2350003, 0, 0, 0, 1.2350003, 0.05078125, 0.3378613, 0)
 shape = SubResource("BoxShape3D_h3emb")
 debug_color = Color(0.9938509, 0, 0.23833454, 0.41960785)
 

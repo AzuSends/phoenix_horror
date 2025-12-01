@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cq8flfax68gco"]
+[gd_scene load_steps=17 format=3 uid="uid://cq8flfax68gco"]
 
 [ext_resource type="Script" uid="uid://dws75go3iv2qw" path="res://Player/PlayerMovement.gd" id="1_cgweh"]
 [ext_resource type="Script" uid="uid://uu3re85r6rr1" path="res://Water/WaterControl.gd" id="2_n4phc"]
 [ext_resource type="Script" uid="uid://dd182ao7ypcf7" path="res://Player/playerHurtbox.gd" id="2_xtsqg"]
 [ext_resource type="Script" uid="uid://dv0bwokbc5hsr" path="res://Player/waterBar.gd" id="3_cbrdi"]
 [ext_resource type="Script" uid="uid://vmjyfkqte2k7" path="res://Player/health.gd" id="4_msm3w"]
+[ext_resource type="Script" uid="uid://bg06wid3a80xr" path="res://Water/waterHitbox.gd" id="5_ipddn"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ythm3"]
 
@@ -86,6 +87,7 @@ script = ExtResource("3_cbrdi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008137584, 0.82016516, -2.8311243)
 collision_layer = 4
 collision_mask = 4
+script = ExtResource("5_ipddn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Hitbox"]
 transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
@@ -118,3 +120,4 @@ color = Color(1, 1, 1, 0)
 
 [connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
 [connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_on_area_exited"]
+[connection signal="body_entered" from="Head/Hitbox" to="Head/Hitbox" method="_on_body_entered"]

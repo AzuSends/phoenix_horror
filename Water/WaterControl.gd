@@ -10,10 +10,14 @@ var waterPool;
 var bucketTimer = 0.0;
 var useRate = 0.25;
 var fillRate = 1.0;
+var waterHitbox
 
 func _ready() -> void:
 	self.emitting = false;
 	waterPool = get_node("/root/Node3D/Main/WaterPool")
+	waterHitbox = $"../Hitbox"
+	waterHitbox.toggleHitboxOff()
+	print(waterHitbox.name)
 	
 func _process(delta: float) -> void:
 	bucketTimer += delta
@@ -33,15 +37,17 @@ func _unhandled_input(event) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if bucketTimer > 1:
+				waterHitbox.toggleHitboxOn()
 				bucketTimer = 0
 				waterOn = !waterOn;
 				await get_tree().create_timer(0.25).timeout
 				water.emit()
 				waterOn = !waterOn;
+				waterHitbox.toggleHitboxOff()
+				
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			if (waterPool.position.distance_to(player.position) < 5):
 				fillOn = !fillOn
-				
 
 func _do_fill():
 	pass
