@@ -1,5 +1,5 @@
+class_name Player
 extends CharacterBody3D
-
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 5.5
@@ -13,6 +13,7 @@ var canMove = true
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	# Input.use_accumulated_input = false # More precise movement, but higher CPU usage
+	add_to_group("Player")
 
 func _unhandled_input(event) -> void:	
 	if event is InputEventMouseMotion:

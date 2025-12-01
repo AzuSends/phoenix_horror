@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgaii4ahimp6k"]
+[gd_scene load_steps=14 format=3 uid="uid://cgaii4ahimp6k"]
 
 [ext_resource type="Script" uid="uid://bgq3c6f0twmm1" path="res://Monster/monsterNav.gd" id="1_m1pgs"]
 [ext_resource type="Shader" uid="uid://vadrkvabelv8" path="res://Burning.tres" id="2_viisk"]
+[ext_resource type="Script" uid="uid://c0uofa80skf1h" path="res://Monster/EnemyState.gd" id="3_h3emb"]
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="4_mqjb0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_viisk"]
 
@@ -11,8 +13,51 @@ shader = ExtResource("2_viisk")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oag5t"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_mqjb0"]
+size = Vector3(2.0493507, 1.8049316, 2.2592888)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2t8d6"]
+size = Vector3(4.9847507, 1, 5.3573685)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3tcyu"]
+size = Vector3(8.245348, 1, 9.316818)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_viisk"]
+size = Vector3(2.0499592, 1.8493652, 2.2589874)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h3emb"]
+size = Vector3(1.1015625, 1.8276978, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h3emb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mqjb0")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 0.5
+}, {
+"frames": [],
+"loop": true,
+"name": &"Chase",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"Pain",
+"speed": 5.0
+}]
+
 [node name="Monster" type="CharacterBody3D"]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_m1pgs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -24,3 +69,54 @@ shape = SubResource("CapsuleShape3D_oag5t")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
+
+[node name="State_Machine" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05078125, 0.14291383, 0)
+script = ExtResource("3_h3emb")
+
+[node name="AttackSight" type="Area3D" parent="State_Machine"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="State_Machine/AttackSight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.049127486, 0.0032958984, -0.076681115)
+shape = SubResource("BoxShape3D_mqjb0")
+
+[node name="ActiveSight" type="Area3D" parent="State_Machine"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="State_Machine/ActiveSight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11866057, 0, -1.1130866)
+shape = SubResource("BoxShape3D_2t8d6")
+debug_color = Color(0.62375945, 0.52918, 0.18223771, 0.41960785)
+
+[node name="Sight" type="Area3D" parent="State_Machine"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="State_Machine/Sight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04403446, 0, -1.9979173)
+shape = SubResource("BoxShape3D_3tcyu")
+debug_color = Color(0.3041937, 0.50381345, 0.97500855, 0.41960785)
+
+[node name="Attack" type="Node3D" parent="."]
+
+[node name="HitBox" type="Area3D" parent="Attack"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attack/HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0019161652, 0.14025877, -0.076454155)
+shape = SubResource("BoxShape3D_viisk")
+
+[node name="HurtBox" type="Area3D" parent="Attack"]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attack/HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05078125, 0.14291383, 0)
+shape = SubResource("BoxShape3D_h3emb")
+debug_color = Color(0.9938509, 0, 0.23833454, 0.41960785)
+
+[node name="Sprites" type="AnimatedSprite3D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h3emb")
+animation = &"Attack"
+
+[connection signal="body_entered" from="Attack/HurtBox" to="." method="_on_hitbox_body_entered"]
+[connection signal="animation_finished" from="Sprites" to="." method="_on_sprites_animation_finished"]

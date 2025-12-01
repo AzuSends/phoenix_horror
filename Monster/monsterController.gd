@@ -55,3 +55,4 @@ func doSpawn():
 	#reset interval, set spawning to false
 	spawning = false
 	pass
+	
