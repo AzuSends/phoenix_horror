@@ -7,6 +7,7 @@ class fireInstance extends Node3D:
 	
 	
 	func _init(firePosition: Vector3):
+		isOnFire = false;
 		position = firePosition
 		intensity = 0
 
@@ -16,30 +17,42 @@ class fireInstance extends Node3D:
 		pass
 		
 		
-		
-	func intensifyFlame():
+		#Changed name for clarity
+	func tryIntensifyFlame():
 		if intensity != maxLevelFlame && intensity >= 1:
 			intensity += 1
 		else:
 			#print("ERR: flame @" + str(selfPosition) + "can not exceed lvl 5")
 			pass
+		updateState()
 	
 	func reduceFlame():
 		if intensity != minLevelFlame:
 			intensity -= 1
+		elif intensity == minLevelFlame:
+			intensity = 0
+		updateState()
 	
 	func setIntensity(val):
 		if val >= 0 and val <= 5:
 			intensity = val
+		updateState()
 			
 	func getPosition():
 		return position
 		
 	func getIntensity():
 		return intensity
+	func getFireState():
+		return isOnFire
 		
 	func _to_string():
 		return str(intensity)
-		
+	
+	func updateState():
+		if intensity > 0:
+			isOnFire = true;
+		elif intensity <= 0:
+			isOnFire = false;
 		
 	

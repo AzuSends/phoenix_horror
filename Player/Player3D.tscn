@@ -1,0 +1,123 @@
+[gd_scene load_steps=17 format=3 uid="uid://cq8flfax68gco"]
+
+[ext_resource type="Script" uid="uid://dws75go3iv2qw" path="res://Player/PlayerMovement.gd" id="1_cgweh"]
+[ext_resource type="Script" uid="uid://uu3re85r6rr1" path="res://Water/WaterControl.gd" id="2_n4phc"]
+[ext_resource type="Script" uid="uid://dd182ao7ypcf7" path="res://Player/playerHurtbox.gd" id="2_xtsqg"]
+[ext_resource type="Script" uid="uid://dv0bwokbc5hsr" path="res://Player/waterBar.gd" id="3_cbrdi"]
+[ext_resource type="Script" uid="uid://vmjyfkqte2k7" path="res://Player/health.gd" id="4_msm3w"]
+[ext_resource type="Script" uid="uid://bg06wid3a80xr" path="res://Water/waterHitbox.gd" id="5_ipddn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ythm3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n4phc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_msm3w"]
+radius = 0.0005
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+albedo_color = Color(0.14117648, 0.3764706, 1, 0.654902)
+emission = Color(0, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cbrdi"]
+material = SubResource("StandardMaterial3D_1bvp3")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbrdi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_msm3w"]
+bg_color = Color(0.5979934, 0.8341457, 0.9946043, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xtsqg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_msm3w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtsqg"]
+bg_color = Color(0.6424829, 0.11986884, 0.076431505, 1)
+
+[node name="Player3d" type="CharacterBody3D" groups=["Enemy", "Player"]]
+collision_mask = 6
+script = ExtResource("1_cgweh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_ythm3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_n4phc")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 6
+script = ExtResource("2_xtsqg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape3D_msm3w")
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5451951, 0)
+
+[node name="WaterController" type="CPUParticles3D" parent="Head"]
+transform = Transform3D(-8.819882, 2.5966216e-07, 49.215942, 25.849888, 42.547882, 4.6325026, -41.880684, 26.261694, -7.505348, 0.8726468, 0.83587587, -0.41783577)
+amount = 100
+speed_scale = 1.5
+mesh = SubResource("SphereMesh_cbrdi")
+emission_shape = 1
+emission_sphere_radius = 0.02
+spread = 15.31
+gravity = Vector3(0, -19.6, 0)
+initial_velocity_min = 0.2
+initial_velocity_max = 0.2
+script = ExtResource("2_n4phc")
+
+[node name="waterBar" type="ProgressBar" parent="Head"]
+offset_left = 958.0
+offset_top = 7.0
+offset_right = 1144.0
+offset_bottom = 34.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_cbrdi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_msm3w")
+script = ExtResource("3_cbrdi")
+
+[node name="Hitbox" type="Area3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008137584, 0.82016516, -2.8311243)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("5_ipddn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Hitbox"]
+transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("BoxShape3D_xtsqg")
+
+[node name="Health" type="ProgressBar" parent="."]
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 196.0
+offset_bottom = 34.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_msm3w")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xtsqg")
+rounded = true
+script = ExtResource("4_msm3w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_right = 1189.0
+offset_bottom = 715.0
+color = Color(1, 1, 1, 0)
+
+[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="Hurtbox" method="_on_area_exited"]
+[connection signal="body_entered" from="Head/Hitbox" to="Head/Hitbox" method="_on_body_entered"]
