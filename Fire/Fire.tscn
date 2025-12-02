@@ -60,7 +60,7 @@ scale_amount_curve = SubResource("Curve_7k83m")
 color_ramp = SubResource("Gradient_oftr6")
 
 [node name="Hitbox" type="Area3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 2.3, 0)
 collision_layer = 2
 collision_mask = 0
 
