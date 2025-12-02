@@ -43,14 +43,15 @@ var stuckThreshold = 0.01
 func _ready():
 	await get_tree().process_frame
 
-func _unhandled_input(event: InputEvent) -> void:
-		if event.is_action_pressed("ui_accept"):
-			var random_position := Vector3.ZERO
-			random_position.x = randf_range(10.0, 60.0)
-			random_position.z = randf_range(4.0, 55.0)
-			navigation_agent_3d.set_target_position(random_position)
+func find_new_position() -> void:
+	var random_position := Vector3.ZERO
+	random_position.x = randf_range(10.0, 60.0)
+	random_position.z = randf_range(4.0, 55.0)
+	navigation_agent_3d.set_target_position(random_position)
 
 func _physics_process(_delta: float) -> void:
+	if navigation_agent_3d.is_navigation_finished():
+		if randf() > 0.95: find_new_position()
 	var destination = navigation_agent_3d.get_next_path_position()
 	var local_destination = destination - global_position
 	var direction = local_destination.normalized()

@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://upx4arriaxah"]
+
+[ext_resource type="Script" path="res://Menu Scenes/main_menu.gd" id="1_w6vqm"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_w6vqm")
+
+[node name="Button Manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Start" type="Button" parent="Button Manager"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 189.0
+offset_right = 720.0
+offset_bottom = 339.0
+text = "Start
+"
+
+[node name="Controls" type="Button" parent="Button Manager"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 366.0
+offset_right = 720.0
+offset_bottom = 516.0
+text = "Controls"
+
+[connection signal="pressed" from="Button Manager/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Button Manager/Controls" to="." method="_on_controls_pressed"]

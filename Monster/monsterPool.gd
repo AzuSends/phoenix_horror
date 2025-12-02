@@ -1,7 +1,7 @@
 extends Node3D
 
 var Monster = preload("res://Monster/Monster.tscn")
-const maxMonsters = 5
+const maxMonsters = 3
 var monsterPool = []
 var monsterPoolData = {}
 const maxX = 47.793
@@ -14,7 +14,7 @@ const respawnTimer = 15
 
 
 func setupMonsterPool():
-	for i in 5:
+	for i in maxMonsters:
 		var newMonster = Monster.instantiate()
 		var randX = randf_range(minX, maxX)
 		var randZ = randf_range(minZ, maxZ)
