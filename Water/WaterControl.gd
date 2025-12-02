@@ -5,16 +5,17 @@ var waterStored = 100
 var waterMax = 100
 signal water;
 
-var waterPool;
+@onready var waterPool: MeshInstance3D = $"../../../WaterPool"
+@onready var cross: Node3D = $"../../../BlessingSiteNode"
 @onready var player: CharacterBody3D = $"../.."
 var bucketTimer = 0.0;
 var useRate = 0.25;
 var fillRate = 1.0;
 var waterHitbox
+var isHoly = false;
 
 func _ready() -> void:
 	self.emitting = false;
-	waterPool = get_node("/root/Node3D/Main/WaterPool")
 	waterHitbox = $"../Hitbox"
 	waterHitbox.toggleHitboxOff()
 	print(waterHitbox.name)
@@ -48,6 +49,10 @@ func _unhandled_input(event) -> void:
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			if (waterPool.position.distance_to(player.position) < 5):
 				fillOn = !fillOn
+				isHoly = false
+			
+			elif (cross.position.distance_to(player.position) < 5):
+				isHoly = true
 
 func _do_fill():
 	pass

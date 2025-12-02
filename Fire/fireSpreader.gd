@@ -81,7 +81,7 @@ func setOnFire(flame, location):
 	
 
 func findFireFromLocation(location: Vector3):
-	const distanceGap = 8
+	const distanceGap = 12
 	var closest = Vector3.INF
 	var closestInDist = location.distance_to(closest)
 	for fireLocation in fireGrid:
@@ -105,6 +105,7 @@ func findCellFromLocation(location: Vector3):
 	var closest = Vector3.INF
 	var closestInDist = location.distance_to(closest)
 	for fireLocation in fireGrid:
+		
 		var newDist = location.distance_to(fireLocation)
 		if newDist < closestInDist:
 			closestInDist = newDist

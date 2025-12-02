@@ -1,7 +1,7 @@
 extends Area3D
 
 
-var playerWaterController
+@onready var playerWaterController: CPUParticles3D = $"../WaterController"
 var player
 const damage = 30
 
@@ -10,7 +10,7 @@ func _ready() -> void:
 	pass
 
 func _on_body_entered(body: Node3D) -> void:
-	if body.name == "Monster":
+	if body.name == "Monster" and playerWaterController.isHoly == true:
 		body.take_damage(damage)
 
 func toggleHitboxOff():

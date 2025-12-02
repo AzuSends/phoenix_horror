@@ -30,6 +30,7 @@ var is_staggered: bool = false
 var damage: float = 20.0	#damage enemy deals to player
 const resetSpreadTimer = 10
 var spreadTimer = resetSpreadTimer
+var caughtFire = false; #Flag for if monster has come into contact with fire
 
 const MOVE_SPEED: float = 4
 
@@ -59,7 +60,10 @@ func _physics_process(_delta: float) -> void:
 	if not self.is_on_floor():
 		self.velocity += get_gravity() * _delta 
 	interpret_state(_delta)
-	attemptSpread(_delta)
+	if caughtFire == true:
+		attemptSpread(_delta)
+	else:
+		tryCatchOnFire()
 	move_and_slide()
 	
 func attemptSpread(delta):
@@ -81,7 +85,11 @@ func attemptSpread(delta):
 			print("failed spread")
 		spreadTimer = resetSpreadTimer
 		
-
+func tryCatchOnFire():
+	var nearbyFire = fireSpreader.findFireFromLocation(global_position)
+	if nearbyFire != null:
+		caughtFire = true;
+	
 		
 func interpret_state(_delta):
 	#can_attack = false
