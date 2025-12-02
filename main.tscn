@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://klfgqbx1wjv" path="res://Water/WaterPool.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://bdy3r203yhljh" path="res://Monster/monsterController.gd" id="7_272bh"]
 [ext_resource type="Script" uid="uid://r1pw746bgs7j" path="res://Water/WaterPool.gd" id="8_5vw27"]
-[ext_resource type="PackedScene" uid="uid://cgaii4ahimp6k" path="res://Monster/Monster.tscn" id="8_kek77"]
+[ext_resource type="Script" uid="uid://2jfesem874xb" path="res://Monster/monsterPool.gd" id="9_kek77"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5vw27"]
 panorama = ExtResource("2_272bh")
@@ -59,9 +59,6 @@ script = ExtResource("7_272bh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13354492, 1.9073486e-06, 0.08841324)
 navigation_mesh = SubResource("NavigationMesh_272bh")
 
-[node name="Monster" parent="." instance=ExtResource("8_kek77")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.792896, 2.5000048, 43.179226)
-
 [node name="Level" type="GridMap" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh_library = ExtResource("3_5vw27")
@@ -85,3 +82,6 @@ size = Vector3(10.38916, 0.5, 13.609131)
 
 [node name="BlessingSiteNode" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.41483, 1.9512229, 16.45472)
+
+[node name="MonsterPool" type="Node3D" parent="."]
+script = ExtResource("9_kek77")

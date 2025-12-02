@@ -13,13 +13,14 @@ extends CharacterBody3D
 @onready var sight: Area3D = $State_Machine/Sight
 @onready var attack_sight: Area3D = $State_Machine/AttackSight
 @onready var attack_area: CollisionShape3D = $Attack/HitBox/CollisionShape3D
-@onready var fireSpreader: GridMap = $"../Level"
+@onready var fireSpreader: GridMap = $"/root/Node3D/Main/Level"
 
 #export variable section :3
 @export_category("Enemy Stats")
 @export var home_point: Node3D
 @export var attack_cooldown: float = 3.0
-@export var health: float = 4.0
+const maxHealth = 4.0
+@export var health: float = maxHealth
 
 var move_dir : Vector3
 var has_attacked: bool
@@ -38,6 +39,9 @@ const MOVE_SPEED: float = 4
 
 var prevPos : Vector3
 var stuckThreshold = 0.01
+
+func _ready():
+	await get_tree().process_frame
 
 func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("ui_accept"):
@@ -67,7 +71,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
 func attemptSpread(delta):
-	spreadTimer -= delta * 3
+	spreadTimer -= delta
 	if spreadTimer <= 0:
 		print("attempting to fan flames")
 		var rng = RandomNumberGenerator.new()
@@ -180,9 +184,18 @@ func take_damage(amount: float) -> void:
 		enemy_dead()
 
 func enemy_dead() -> void:
-	print("enemy dead")
-	self.animation.play("Pain")
-	self.queue_free()
+	caughtFire = false
+	spreadTimer = resetSpreadTimer
+	process_mode = Node.PROCESS_MODE_DISABLED
+	print("monster is dead (for now...)")
+	
+func reviveDead():
+	health = maxHealth
+	is_staggered = false
+	can_attack = true
+	state_machine.current_state = State_Machine.state.IDLE
+	process_mode = Node.PROCESS_MODE_INHERIT
+	print("monster brought back to life")
 
 #upon the hitbox being entered, the player will take damage
 func _on_hitbox_body_entered(body: Node3D) -> void:

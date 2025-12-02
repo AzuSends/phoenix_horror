@@ -18,7 +18,6 @@ func _ready() -> void:
 	self.emitting = false;
 	waterHitbox = $"../Hitbox"
 	waterHitbox.toggleHitboxOff()
-	print(waterHitbox.name)
 	
 func _process(delta: float) -> void:
 	bucketTimer += delta
