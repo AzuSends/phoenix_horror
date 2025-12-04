@@ -11,6 +11,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h3emb"]
 render_priority = 0
 shader = ExtResource("2_viisk")
+shader_parameter/Fire_Intensity = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oag5t"]
 
