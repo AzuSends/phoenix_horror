@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cq8flfax68gco"]
+[gd_scene load_steps=22 format=3 uid="uid://cq8flfax68gco"]
 
 [ext_resource type="Script" uid="uid://dws75go3iv2qw" path="res://Player/PlayerMovement.gd" id="1_cgweh"]
 [ext_resource type="Script" uid="uid://uu3re85r6rr1" path="res://Water/WaterControl.gd" id="2_n4phc"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://vmjyfkqte2k7" path="res://Player/health.gd" id="4_msm3w"]
 [ext_resource type="Script" uid="uid://bg06wid3a80xr" path="res://Water/waterHitbox.gd" id="5_ipddn"]
 [ext_resource type="AudioStream" uid="uid://dc2tethiwa6g4" path="res://Assets/Sounds/Zombie minecraft.ogg.mp3" id="6_luogs"]
+[ext_resource type="Texture2D" uid="uid://b5umlxebui5am" path="res://Assets/misc/water.PNG" id="10_pik2p"]
+[ext_resource type="Texture2D" uid="uid://cjya3v2q61of6" path="res://Assets/misc/heart.PNG" id="11_o3ffn"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ythm3"]
 
@@ -92,6 +94,11 @@ theme_override_styles/background = SubResource("StyleBoxEmpty_cbrdi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_msm3w")
 script = ExtResource("3_cbrdi")
 
+[node name="WaterSprite" type="Sprite2D" parent="Head"]
+position = Vector2(955, 26)
+scale = Vector2(0.027648939, 0.026733397)
+texture = ExtResource("10_pik2p")
+
 [node name="Hitbox" type="Area3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008137584, 0.82016516, -2.8311243)
 collision_layer = 4
@@ -114,6 +121,11 @@ theme_override_styles/background = SubResource("StyleBoxEmpty_msm3w")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xtsqg")
 rounded = true
 script = ExtResource("4_msm3w")
+
+[node name="HeartSprite" type="Sprite2D" parent="Health"]
+position = Vector2(196, 20)
+scale = Vector2(0.027648939, 0.026733397)
+texture = ExtResource("11_o3ffn")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
