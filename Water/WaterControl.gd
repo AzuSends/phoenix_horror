@@ -5,6 +5,8 @@ var waterStored = 100
 var waterMax = 100
 signal water;
 
+@onready var waterSFX = $WaterSound
+@onready var holySFX = $HolySound
 @onready var waterPool: MeshInstance3D = $"../../../WaterPool"
 @onready var cross: Node3D = $"../../../BlessingSiteNode"
 @onready var player: CharacterBody3D = $"../.."
@@ -49,9 +51,12 @@ func _unhandled_input(event) -> void:
 			if (waterPool.position.distance_to(player.position) < 5):
 				fillOn = !fillOn
 				isHoly = false
+				waterSFX.play()
 			
 			elif (cross.position.distance_to(player.position) < 5):
 				isHoly = true
+				holySFX.play() #super long rn, ill cut it down l8r
+				
 
 func _do_fill():
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=15 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Texture2D" uid="uid://bo4h74qm5lr4b" path="res://hdri/qwantani_moon_noon_puresky_4k.exr" id="2_272bh"]
 [ext_resource type="MeshLibrary" uid="uid://vngccltu8tos" path="res://Level/Used Tiles.tres" id="3_5vw27"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://klfgqbx1wjv" path="res://Water/WaterPool.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://bdy3r203yhljh" path="res://Monster/monsterController.gd" id="7_272bh"]
 [ext_resource type="Script" uid="uid://r1pw746bgs7j" path="res://Water/WaterPool.gd" id="8_5vw27"]
+[ext_resource type="AudioStream" uid="uid://chma01g40h8ey" path="res://Assets/Sounds/Cooling FizzWater on Lava (Minecraft Sound) - Sound Effect for editing.mp3" id="8_kek77"]
 [ext_resource type="Script" uid="uid://2jfesem874xb" path="res://Monster/monsterPool.gd" id="9_kek77"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5vw27"]
@@ -71,6 +72,9 @@ data = {
 }
 script = ExtResource("3_my2oe")
 metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="FireSound" type="AudioStreamPlayer" parent="Level"]
+stream = ExtResource("8_kek77")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.23999, 1.1291704, 30.655449)

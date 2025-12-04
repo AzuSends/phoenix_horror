@@ -1,11 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://cq8flfax68gco"]
+[gd_scene load_steps=20 format=3 uid="uid://cq8flfax68gco"]
 
 [ext_resource type="Script" uid="uid://dws75go3iv2qw" path="res://Player/PlayerMovement.gd" id="1_cgweh"]
 [ext_resource type="Script" uid="uid://uu3re85r6rr1" path="res://Water/WaterControl.gd" id="2_n4phc"]
 [ext_resource type="Script" uid="uid://dd182ao7ypcf7" path="res://Player/playerHurtbox.gd" id="2_xtsqg"]
 [ext_resource type="Script" uid="uid://dv0bwokbc5hsr" path="res://Player/waterBar.gd" id="3_cbrdi"]
+[ext_resource type="AudioStream" uid="uid://dp0ukyb7gbbg6" path="res://Assets/Sounds/aaahhhhh.mp3" id="4_5qd45"]
+[ext_resource type="AudioStream" uid="uid://doimhbi0fltd5" path="res://Assets/Sounds/wata bucket.mp3" id="4_31sn7"]
 [ext_resource type="Script" uid="uid://vmjyfkqte2k7" path="res://Player/health.gd" id="4_msm3w"]
 [ext_resource type="Script" uid="uid://bg06wid3a80xr" path="res://Water/waterHitbox.gd" id="5_ipddn"]
+[ext_resource type="AudioStream" uid="uid://dc2tethiwa6g4" path="res://Assets/Sounds/Zombie minecraft.ogg.mp3" id="6_luogs"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ythm3"]
 
@@ -74,6 +77,12 @@ initial_velocity_min = 0.2
 initial_velocity_max = 0.2
 script = ExtResource("2_n4phc")
 
+[node name="HolySound" type="AudioStreamPlayer" parent="Head/WaterController"]
+stream = ExtResource("4_5qd45")
+
+[node name="WaterSound" type="AudioStreamPlayer" parent="Head/WaterController"]
+stream = ExtResource("4_31sn7")
+
 [node name="waterBar" type="ProgressBar" parent="Head"]
 offset_left = 958.0
 offset_top = 7.0
@@ -92,6 +101,9 @@ script = ExtResource("5_ipddn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Hitbox"]
 transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("BoxShape3D_xtsqg")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="Head/Hitbox"]
+stream = ExtResource("6_luogs")
 
 [node name="Health" type="ProgressBar" parent="."]
 offset_left = 10.0

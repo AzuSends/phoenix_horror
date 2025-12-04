@@ -1,5 +1,6 @@
 extends GridMap
 
+@onready var fireSFX = $FireSound
 
 var FireInstance = preload("res://Fire/FireInstance.gd")
 var fireScene = preload("res://Fire/Fire.tscn")
@@ -132,8 +133,10 @@ func startFire(location):
 	fireGrid[location]["flame"].setIntensity(1)
 	if fireGrid[location]["flame"].getFireState() == true:
 		instances[location].visible = true
+		
 func putOutFire(location):
 	fireGrid[location]["flame"].setIntensity(0)
+	fireSFX.play()
 	if fireGrid[location]["flame"].getFireState() == false:
 		instances[location].visible = false
 
