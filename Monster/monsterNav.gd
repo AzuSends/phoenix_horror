@@ -77,6 +77,8 @@ func attemptSpread(delta):
 		print("attempting to fan flames")
 		var rng = RandomNumberGenerator.new()
 		var cellLocation = fireSpreader.findCellFromLocation(global_position)
+		if cellLocation == null:
+			return
 		var fireCell = fireSpreader.fireGrid[cellLocation]
 		print(fireCell["flame"].getFireState())
 		if rng.randi_range(1, 3) == 3:

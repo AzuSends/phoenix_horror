@@ -5,10 +5,9 @@
 [ext_resource type="Script" uid="uid://c0uofa80skf1h" path="res://Monster/EnemyState.gd" id="3_h3emb"]
 [ext_resource type="Script" uid="uid://bg06wid3a80xr" path="res://Water/waterHitbox.gd" id="4_2t8d6"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="4_mqjb0"]
+[ext_resource type="PackedScene" uid="uid://cvewwdgld5125" path="res://Assets/Models/Ash_monster.gltf" id="6_3tcyu"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_viisk"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h3emb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j8or5"]
 render_priority = 0
 shader = ExtResource("2_viisk")
 shader_parameter/Fire_Intensity = 1.0
@@ -62,9 +61,12 @@ collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_m1pgs")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_viisk")
-surface_material_override/0 = SubResource("ShaderMaterial_h3emb")
+[node name="Ash_monster" parent="." instance=ExtResource("6_3tcyu")]
+transform = Transform3D(1.1111112, 0, 0, 0, 1.1111112, 0, 0, 0, 1.1111112, 3.096937, 0, -1.5145271)
+
+[node name="legR" parent="Ash_monster" index="0"]
+transform = Transform3D(0.25999618, 6.6365115e-05, 0.0017380547, 3.215381e-11, -0.6998934, 0.005584843, 0.0014123842, -0.012216665, -0.3199466, -2.628855, -0.49123788, 1.352686)
+surface_material_override/0 = SubResource("ShaderMaterial_j8or5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_oag5t")
@@ -117,9 +119,11 @@ shape = SubResource("BoxShape3D_h3emb")
 debug_color = Color(0.9938509, 0, 0.23833454, 0.41960785)
 
 [node name="Sprites" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.27978104, 0, 0, 0, 0.15800983, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.27978104, 0, 0, 0, 0.15800984, 0, 0, 0, 1, 0, 0.34793147, 0)
 sprite_frames = SubResource("SpriteFrames_h3emb")
 animation = &"Attack"
 
 [connection signal="body_entered" from="Attack/HurtBox" to="." method="_on_hitbox_body_entered"]
 [connection signal="animation_finished" from="Sprites" to="." method="_on_sprites_animation_finished"]
+
+[editable path="Ash_monster"]

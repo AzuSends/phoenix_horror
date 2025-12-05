@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=14 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Texture2D" uid="uid://bo4h74qm5lr4b" path="res://hdri/qwantani_moon_noon_puresky_4k.exr" id="2_272bh"]
 [ext_resource type="MeshLibrary" uid="uid://vngccltu8tos" path="res://Level/Used Tiles.tres" id="3_5vw27"]
 [ext_resource type="Script" uid="uid://ba7pkgwn5eauc" path="res://Fire/fireSpreader.gd" id="3_my2oe"]
 [ext_resource type="PackedScene" uid="uid://cq8flfax68gco" path="res://Player/Player3D.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://klfgqbx1wjv" path="res://Water/WaterPool.tscn" id="6_7mycd"]
-[ext_resource type="Script" uid="uid://bdy3r203yhljh" path="res://Monster/monsterController.gd" id="7_272bh"]
 [ext_resource type="Script" uid="uid://r1pw746bgs7j" path="res://Water/WaterPool.gd" id="8_5vw27"]
 [ext_resource type="AudioStream" uid="uid://chma01g40h8ey" path="res://Assets/Sounds/Cooling FizzWater on Lava (Minecraft Sound) - Sound Effect for editing.mp3" id="8_kek77"]
 [ext_resource type="Script" uid="uid://2jfesem874xb" path="res://Monster/monsterPool.gd" id="9_kek77"]
@@ -51,10 +50,6 @@ script = ExtResource("8_5vw27")
 [node name="Moonlight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.45930654, 0.35771632, -0.81306624, 0.39135826, 0.7402099, 0.5467433, 0.7974186, -0.5693228, 0.19998801, -44.24698, 97.692635, 73.346985)
 light_color = Color(0.6745098, 0.6745098, 0.75686276, 1)
-
-[node name="SpawnController" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.546276, 7.694613, 45.749172)
-script = ExtResource("7_272bh")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13354492, 1.9073486e-06, 0.08841324)
