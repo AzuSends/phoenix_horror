@@ -14,6 +14,13 @@ extends CharacterBody3D
 @onready var attack_sight: Area3D = $State_Machine/AttackSight
 @onready var attack_area: CollisionShape3D = $Attack/HitBox/CollisionShape3D
 @onready var fireSpreader: GridMap = $"/root/Node3D/Main/Level"
+@onready var selfFireEffect: CPUParticles3D = $Fire
+@onready var monsterBody: MeshInstance3D = $Ash_monster/legR 
+
+@onready var burningShaderTemp = preload("res://Burning.tres")
+@onready var burningShader = ShaderMaterial.new()
+@onready var smoulderingShaderTemp = preload("res://Smouldering.tres")
+@onready var smoulderingShader = ShaderMaterial.new()
 
 #export variable section :3
 @export_category("Enemy Stats")
@@ -41,6 +48,9 @@ var prevPos : Vector3
 var stuckThreshold = 0.01
 
 func _ready():
+	selfFireEffect.visible = false;
+	burningShader.shader = burningShaderTemp
+	smoulderingShader.shader = smoulderingShaderTemp
 	await get_tree().process_frame
 
 func find_new_position() -> void:
@@ -96,6 +106,9 @@ func tryCatchOnFire():
 	var nearbyFire = fireSpreader.findFireFromLocation(global_position)
 	if nearbyFire != null:
 		caughtFire = true;
+		selfFireEffect.visible = true;
+		
+		
 	
 		
 func interpret_state(_delta):
@@ -188,7 +201,10 @@ func take_damage(amount: float) -> void:
 
 func enemy_dead() -> void:
 	caughtFire = false
+	selfFireEffect.restart()
+	selfFireEffect.visible = false;
 	spreadTimer = resetSpreadTimer
+	monsterBody.set_surface_override_material(0, smoulderingShader)
 	process_mode = Node.PROCESS_MODE_DISABLED
 	print("monster is dead (for now...)")
 	
@@ -196,6 +212,7 @@ func reviveDead():
 	health = maxHealth
 	is_staggered = false
 	can_attack = true
+	monsterBody.set_surface_override_material(0, burningShader)
 	state_machine.current_state = State_Machine.state.IDLE
 	process_mode = Node.PROCESS_MODE_INHERIT
 	print("monster brought back to life")

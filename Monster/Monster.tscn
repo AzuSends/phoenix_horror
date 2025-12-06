@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cgaii4ahimp6k"]
+[gd_scene load_steps=19 format=3 uid="uid://cgaii4ahimp6k"]
 
 [ext_resource type="Script" uid="uid://bgq3c6f0twmm1" path="res://Monster/monsterNav.gd" id="1_m1pgs"]
 [ext_resource type="Shader" uid="uid://vadrkvabelv8" path="res://Burning.tres" id="2_viisk"]
@@ -54,6 +54,26 @@ animations = [{
 "name": &"Pain",
 "speed": 5.0
 }]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qkn5"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+diffuse_mode = 3
+vertex_color_use_as_albedo = true
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_qk8vh"]
+material = SubResource("StandardMaterial3D_2qkn5")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_7k83m"]
+_data = [Vector2(0, 1), 0.0, 0.9662918, 0, 0, Vector2(0.58720934, 0.6516854), 0.0, 0.0, 0, 0, Vector2(0.9709303, 0.4044944), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_oftr6"]
+offsets = PackedFloat32Array(0, 0.0890411, 0.86986303)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.75686276, 0, 1, 1, 0, 0, 1)
 
 [node name="Monster" type="CharacterBody3D"]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
@@ -122,6 +142,20 @@ debug_color = Color(0.9938509, 0, 0.23833454, 0.41960785)
 transform = Transform3D(0.27978104, 0, 0, 0, 0.15800984, 0, 0, 0, 1, 0, 0.34793147, 0)
 sprite_frames = SubResource("SpriteFrames_h3emb")
 animation = &"Attack"
+
+[node name="Fire" type="CPUParticles3D" parent="."]
+transform = Transform3D(0.08888889, 0, 0, 0, 0.08888889, 0, 0, 0, 0.08888889, 0, 1.7319494, 0)
+amount = 100
+lifetime = 0.5
+mesh = SubResource("QuadMesh_qk8vh")
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector3(0, 10, 0)
+radial_accel_min = -36.08
+radial_accel_max = 5.31
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_7k83m")
+color_ramp = SubResource("Gradient_oftr6")
 
 [connection signal="body_entered" from="Attack/HurtBox" to="." method="_on_hitbox_body_entered"]
 [connection signal="animation_finished" from="Sprites" to="." method="_on_sprites_animation_finished"]

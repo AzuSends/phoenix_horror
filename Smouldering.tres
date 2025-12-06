@@ -1,17 +1,17 @@
-[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://vadrkvabelv8"]
+[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://c1yufqhg1i4sn"]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ldirp"]
 input_name = "time"
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_4f50u"]
-default_input_values = [0, 0.0, 1, 0.05]
+default_input_values = [0, 0.0, 1, 0.02]
 operator = 2
 
 [sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_p2ibj"]
 default_input_values = [0, 0.6, 1, 0.75, 2, 0.5]
 
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_4f50u"]
-constant = Color(1, 0.27450982, 0.039215688, 1)
+constant = Color(0.66245234, 0.66245234, 0.6624523, 1)
 
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_p2ibj"]
 
@@ -77,7 +77,7 @@ void fragment() {
 
 
 // FloatOp:12
-	float n_in12p1 = 0.05000;
+	float n_in12p1 = 0.02000;
 	float n_out12p0 = n_out11p0 * n_in12p1;
 
 
@@ -97,7 +97,7 @@ void fragment() {
 
 
 // ColorConstant:15
-	vec4 n_out15p0 = vec4(1.000000, 0.274510, 0.039216, 1.000000);
+	vec4 n_out15p0 = vec4(0.662452, 0.662452, 0.662452, 1.000000);
 
 
 // VectorOp:18
